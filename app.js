@@ -14,6 +14,15 @@ app.get("/articles", (_, res) => {
 	res.json(articles);
 });
 
+app.get("/articles/:id", (req, res) => {
+	const { id } = req.params;
+	const article = articles.find((article) => article.id === id);
+
+	if (article) return res.json(article);
+
+	res.status(404).json({ message: "Article not found" });
+});
+
 const PORT = process.env.PORT || 1234;
 
 app.listen(PORT, () => {

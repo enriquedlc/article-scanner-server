@@ -1,1 +1,5 @@
+### Get all articles
 GET http://localhost:1234/articles
+
+### Get a specific article
+GET http://localhost:1234/articles/1
