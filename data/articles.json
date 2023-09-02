@@ -1,82 +1,82 @@
 [
-  {
-    "id": "1",
-    "name": "Artículo 1",
-    "exhibition": 5,
-    "shelf": 20,
-    "warehouse": 100,
-    "articleIcon": "icono1.png"
-  },
-  {
-    "id": "2",
-    "name": "Artículo 2",
-    "exhibition": 8,
-    "shelf": 15,
-    "warehouse": 75,
-    "articleIcon": "icono2.png"
-  },
-  {
-    "id": "3",
-    "name": "Artículo 3",
-    "exhibition": 3,
-    "shelf": 10,
-    "warehouse": 50,
-    "articleIcon": "icono3.png"
-  },
-  {
-    "id": "4",
-    "name": "Artículo 4",
-    "exhibition": 6,
-    "shelf": 18,
-    "warehouse": 90,
-    "articleIcon": "icono4.png"
-  },
-  {
-    "id": "5",
-    "name": "Artículo 5",
-    "exhibition": 7,
-    "shelf": 12,
-    "warehouse": 60,
-    "articleIcon": "icono5.png"
-  },
-  {
-    "id": "6",
-    "name": "Artículo 6",
-    "exhibition": 4,
-    "shelf": 22,
-    "warehouse": 110,
-    "articleIcon": "icono6.png"
-  },
-  {
-    "id": "7",
-    "name": "Artículo 7",
-    "exhibition": 9,
-    "shelf": 14,
-    "warehouse": 70,
-    "articleIcon": "icono7.png"
-  },
-  {
-    "id": "8",
-    "name": "Artículo 8",
-    "exhibition": 2,
-    "shelf": 25,
-    "warehouse": 125,
-    "articleIcon": "icono8.png"
-  },
-  {
-    "id": "9",
-    "name": "Artículo 9",
-    "exhibition": 7,
-    "shelf": 16,
-    "warehouse": 80,
-    "articleIcon": "icono9.png"
-  },
-  {
-    "id": "10",
-    "name": "Artículo 10",
-    "exhibition": 6,
-    "shelf": 20,
-    "warehouse": 100,
-    "articleIcon": "icono10.png"
-  }
+	{
+		"id": "1",
+		"createdAt": "2023-01-01T15:00:00.000Z",
+		"name": "Artículo 1",
+		"exhibition": 5,
+		"shelf": 20,
+		"warehouse": 100
+	},
+	{
+		"id": "2",
+		"createdAt": "2023-02-02T15:00:00.000Z",
+		"name": "Artículo 2",
+		"exhibition": 8,
+		"shelf": 15,
+		"warehouse": 75
+	},
+	{
+		"id": "3",
+		"createdAt": "2023-03-03T15:00:00.000Z",
+		"name": "Artículo 3",
+		"exhibition": 3,
+		"shelf": 10,
+		"warehouse": 50
+	},
+	{
+		"id": "4",
+		"createdAt": "2023-04-04T15:00:00.000Z",
+		"name": "Artículo 4",
+		"exhibition": 6,
+		"shelf": 18,
+		"warehouse": 90
+	},
+	{
+		"id": "5",
+		"createdAt": "2023-05-05T15:00:00.000Z",
+		"name": "Artículo 5",
+		"exhibition": 7,
+		"shelf": 12,
+		"warehouse": 60
+	},
+	{
+		"id": "6",
+		"createdAt": "2023-06-06T15:00:00.000Z",
+		"name": "Artículo 6",
+		"exhibition": 4,
+		"shelf": 22,
+		"warehouse": 110
+	},
+	{
+		"id": "7",
+		"createdAt": "2023-07-07T15:00:00.000Z",
+		"name": "Artículo 7",
+		"exhibition": 9,
+		"shelf": 14,
+		"warehouse": 70
+	},
+	{
+		"id": "8",
+		"createdAt": "2023-08-08T15:00:00.000Z",
+		"name": "Artículo 8",
+		"exhibition": 2,
+		"shelf": 25,
+		"warehouse": 125
+	},
+	{
+		"id": "9",
+		"createdAt": "2023-09-09T15:00:00.000Z",
+		"name": "Artículo 9",
+		"exhibition": 7,
+		"shelf": 16,
+		"warehouse": 80
+	},
+	{
+		"id": "10",
+		"createdAt": "2023-10-10T15:00:00.000Z",
+		"name": "Artículo 10",
+		"exhibition": 6,
+		"shelf": 20,
+		"warehouse": 100
+	}
 ]

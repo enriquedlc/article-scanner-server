@@ -10,7 +10,18 @@ app.get("/", (_, res) => {
 	res.json({ message: "Hello World!" });
 });
 
-app.get("/articles", (_, res) => {
+app.get("/articles", (req, res) => {
+	console.log(req.query);
+	console.log("pene");
+	const { createdAt } = req.query;
+
+	if (createdAt) {
+		const filteredArticles = articles.filter(
+			(article) => article.createdAt >= createdAt,
+		);
+		return res.json(filteredArticles);
+	}
+
 	res.json(articles);
 });
 
