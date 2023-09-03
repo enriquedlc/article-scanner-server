@@ -1,9 +1,13 @@
 const express = require("express"); // TODO: convert to ES modules
+const crypto = require("node:crypto");
 
 const articles = require("./data/articles.json");
 
+const validateArticle = require("./src/schemas/articles");
+
 const app = express();
 
+app.use(express.json());
 app.disable("x-powered-by");
 
 app.get("/", (_, res) => {
@@ -11,8 +15,6 @@ app.get("/", (_, res) => {
 });
 
 app.get("/articles", (req, res) => {
-	console.log(req.query);
-	console.log("pene");
 	const { createdAt } = req.query;
 
 	if (createdAt) {
@@ -32,6 +34,23 @@ app.get("/articles/:id", (req, res) => {
 	if (article) return res.json(article);
 
 	res.status(404).json({ message: "Article not found" });
+});
+
+// POST
+app.post("/articles", (req, res) => {
+	const result = validateArticle(req.body);
+
+	if (!result.success) {
+		return res.status(400).json({ message: JSON.parse(result.error.message) });
+	}
+
+	const newArticle = {
+		id: crypto.randomUUID(),
+		createdAt: new Date(),
+		...result.data,
+	};
+
+	res.status(201).json(newArticle);
 });
 
 const PORT = process.env.PORT || 1234;
