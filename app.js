@@ -1,5 +1,6 @@
 const express = require("express"); // TODO: convert to ES modules
 const crypto = require("node:crypto");
+const cors = require("cors");
 
 const articles = require("./data/articles.json");
 
@@ -10,8 +11,10 @@ const {
 
 const app = express();
 
-app.use(express.json());
 app.disable("x-powered-by");
+
+app.use(express.json());
+app.use(cors());
 
 app.get("/", (_, res) => {
 	res.json({ message: "Hello World!" });
