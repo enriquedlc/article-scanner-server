@@ -85,6 +85,21 @@ app.put("/articles/:id", (req, res) => {
 	res.json(updatedArticle);
 });
 
+// DELETE
+app.delete("/articles/:id", (req, res) => {
+	const { id } = req.params;
+	const articleIndex = articles.findIndex((article) => article.id === id);
+
+	if (articleIndex === -1)
+		return res.status(404).json({ message: "Article not found" });
+
+	articles.splice(articleIndex, 1);
+
+	res.status(204).send({
+		message: "Article deleted",
+	});
+});
+
 const PORT = process.env.PORT || 1234;
 
 app.listen(PORT, () => {

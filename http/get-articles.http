@@ -30,3 +30,6 @@ Content-Type: application/json
     "shelf": 20,
     "warehouse": 123
 }
+
+### Delete an article
+DELETE http://localhost:1234/articles/4
