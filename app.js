@@ -3,7 +3,10 @@ const crypto = require("node:crypto");
 
 const articles = require("./data/articles.json");
 
-const validateArticle = require("./src/schemas/articles");
+const {
+	validateArticle,
+	validatePartialArticle,
+} = require("./src/schemas/articles");
 
 const app = express();
 
@@ -54,6 +57,29 @@ app.post("/articles", (req, res) => {
 	articles.push(newArticle);
 
 	res.status(201).json(newArticle);
+});
+
+// PUT
+app.put("/articles/:id", (req, res) => {
+	const { id } = req.params;
+	const result = validatePartialArticle(req.body);
+	const articleIndex = articles.findIndex((article) => article.id === id);
+
+	if (articleIndex === -1)
+		return res.status(404).json({ message: "Article not found" });
+
+	if (!result.success)
+		return res.status(400).json({ message: JSON.parse(result.error.message) });
+
+	const updatedArticle = {
+		...articles[articleIndex],
+		...result.data,
+		updatedAt: new Date(),
+	};
+
+	articles[articleIndex] = updatedArticle;
+
+	res.json(updatedArticle);
 });
 
 const PORT = process.env.PORT || 1234;

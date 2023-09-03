@@ -45,4 +45,8 @@ function validateArticle(object) {
 	return articleShecma.safeParse(object);
 }
 
-module.exports = validateArticle;
+function validatePartialArticle(object) {
+	return articleShecma.partial().safeParse(object);
+}
+
+module.exports = { validateArticle, validatePartialArticle };

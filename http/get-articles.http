@@ -18,3 +18,15 @@ Content-Type: application/json
     "shelf": 20,
     "warehouse": 100
 }
+
+### Update an article
+PUT http://localhost:1234/articles/4
+Content-Type: application/json
+
+{
+    "name": "New Article",
+    "barcode": "3434343434",
+    "exhibition": 3,
+    "shelf": 20,
+    "warehouse": 123
+}
