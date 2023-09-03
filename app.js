@@ -47,8 +47,11 @@ app.post("/articles", (req, res) => {
 	const newArticle = {
 		id: crypto.randomUUID(),
 		createdAt: new Date(),
+		updatedAt: new Date(),
 		...result.data,
 	};
+
+	articles.push(newArticle);
 
 	res.status(201).json(newArticle);
 });
