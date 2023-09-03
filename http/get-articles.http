@@ -6,3 +6,15 @@ GET http://localhost:1234/articles/1
 
 ### Get articles by date
 GET http://localhost:1234/articles?createdAt=2023-04-04T15:00:00.000Z
+
+### Create an article
+POST http://localhost:1234/articles
+Content-Type: application/json
+
+{
+    "name": "New Article",
+    "barcode": "1234567890123",
+    "exhibition": 3,
+    "shelf": 20,
+    "warehouse": 100
+}
