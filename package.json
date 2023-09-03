@@ -1,27 +1,28 @@
 {
-  "name": "article-scanner-server",
-  "version": "1.0.0",
-  "description": "Nodejs server for an article scanner app built with React Native.",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/enriquedlc/article-scanner-server.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/enriquedlc/article-scanner-server/issues"
-  },
-  "homepage": "https://github.com/enriquedlc/article-scanner-server#readme",
-  "dependencies": {
-    "cors": "2.8.5",
-    "express": "4.18.2",
-    "nodemon": "3.0.1",
-    "zod": "3.22.2"
-  }
+	"name": "article-scanner-server",
+	"version": "1.0.0",
+	"description": "Nodejs server for an article scanner app built with React Native.",
+	"main": "app.js",
+	"type": "module",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "nodemon ./app.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/enriquedlc/article-scanner-server.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/enriquedlc/article-scanner-server/issues"
+	},
+	"homepage": "https://github.com/enriquedlc/article-scanner-server#readme",
+	"dependencies": {
+		"cors": "2.8.5",
+		"express": "4.18.2",
+		"nodemon": "3.0.1",
+		"zod": "3.22.2"
+	}
 }

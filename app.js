@@ -1,19 +1,22 @@
-const express = require("express"); // TODO: convert to ES modules
-const crypto = require("node:crypto");
-const cors = require("cors");
+import cors from "cors";
+import express, { json } from "express";
+import { randomUUID } from "node:crypto";
+import { createRequire } from "node:module";
+
+const require = createRequire(import.meta.url);
 
 const articles = require("./data/articles.json");
 
-const {
+import {
 	validateArticle,
 	validatePartialArticle,
-} = require("./src/schemas/articles");
+} from "./src/schemas/articles.js";
 
 const app = express();
 
 app.disable("x-powered-by");
 
-app.use(express.json());
+app.use(json());
 app.use(cors());
 
 app.get("/", (_, res) => {
@@ -51,7 +54,7 @@ app.post("/articles", (req, res) => {
 	}
 
 	const newArticle = {
-		id: crypto.randomUUID(),
+		id: randomUUID(),
 		createdAt: new Date(),
 		updatedAt: new Date(),
 		...result.data,

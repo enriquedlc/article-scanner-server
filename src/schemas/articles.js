@@ -1,6 +1,6 @@
-const z = require("zod");
+import z from "zod";
 
-const articleShecma = z.object({
+export const articleShecma = z.object({
 	name: z
 		.string({
 			invalid_type_error: "Name must be a string",
@@ -41,12 +41,10 @@ const articleShecma = z.object({
 		.min(0),
 });
 
-function validateArticle(object) {
+export function validateArticle(object) {
 	return articleShecma.safeParse(object);
 }
 
-function validatePartialArticle(object) {
+export function validatePartialArticle(object) {
 	return articleShecma.partial().safeParse(object);
 }
-
-module.exports = { validateArticle, validatePartialArticle };
