@@ -1,27 +1,20 @@
-const express = require("express"); // TODO: convert to ES modules
+import cors from "cors";
+import express, { json } from "express";
 
-const articles = require("./data/articles.json");
+import { articlesRouter } from "./src/routes/movies.js";
 
 const app = express();
 
 app.disable("x-powered-by");
 
-app.get("/", (_, res) => {
-	res.json({ message: "Hello World!" });
-});
+app.use(json());
+app.use(cors());
 
-app.get("/articles", (_, res) => {
-	res.json(articles);
-});
+// app.get("/", (_, res) => {
+// 	res.json({ message: "Article scanner server 📦" });
+// });
 
-app.get("/articles/:id", (req, res) => {
-	const { id } = req.params;
-	const article = articles.find((article) => article.id === id);
-
-	if (article) return res.json(article);
-
-	res.status(404).json({ message: "Article not found" });
-});
+app.use("/articles", articlesRouter);
 
 const PORT = process.env.PORT || 1234;
 
