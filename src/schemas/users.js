@@ -25,3 +25,11 @@ export const userSchema = z.object({
 			path: ["confirmPassword"],
 		}),
 });
+
+export function validateUser(object) {
+	return userSchema.safeParse(object);
+}
+
+export function validatePartialUser(object) {
+	return userSchema.partial().safeParse(object);
+}
