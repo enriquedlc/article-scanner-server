@@ -1,7 +1,7 @@
 import cors from "cors";
 import express, { json } from "express";
 
-import { articlesRouter } from "./src/routes/movies.js";
+import { articlesRouter } from "./src/routes/articles.js";
 
 const app = express();
 
