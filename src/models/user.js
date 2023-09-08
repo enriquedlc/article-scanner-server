@@ -25,8 +25,6 @@ export class UserModel {
 
 		users.push(newUser);
 
-		console.log(users);
-
 		return newUser;
 	}
 

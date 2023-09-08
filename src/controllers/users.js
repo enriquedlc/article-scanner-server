@@ -21,10 +21,7 @@ export class UserController {
 	static async create(req, res) {
 		const result = validateUser(req.body);
 
-		if (!result.success)
-			return res
-				.status(400)
-				.json({ message: JSON.parse(result.error.message) });
+		if (!result.success) return res.status(400).json({ message: result.error });
 
 		const newUser = await UserModel.create({ user: result.data });
 
