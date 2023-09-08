@@ -1,8 +1,9 @@
 import { randomUUID } from "node:crypto";
 
-import { readJSON } from "@utils/read-json.js";
+import { encryptPassword } from "../lib/bcrypt.js";
+import { readJSON } from "../utils/read-json.js";
 
-const users = readJSON("@data/users.json");
+const users = readJSON("../data/users.json");
 
 export class UserModel {
 	static async getAll() {
@@ -16,12 +17,15 @@ export class UserModel {
 	static async create({ user }) {
 		const newUser = {
 			id: randomUUID(),
+			...user,
+			password: await encryptPassword(user.password),
 			createdAt: new Date(),
 			updatedAt: new Date(),
-			...user,
 		};
 
 		users.push(newUser);
+
+		console.log(users);
 
 		return newUser;
 	}
@@ -44,6 +48,7 @@ export class UserModel {
 		const updatedUser = {
 			...users[userIndex],
 			...user,
+			password: await encryptPassword(user.password),
 			updatedAt: new Date(),
 		};
 
@@ -51,4 +56,8 @@ export class UserModel {
 
 		return updatedUser;
 	}
+
+	// TODO: patch user username
+	// TODO: patch user password
+	// TODO: patch user email
 }

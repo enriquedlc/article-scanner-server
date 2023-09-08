@@ -1,6 +1,6 @@
-import { UserModel } from "@models/user";
+import { UserModel } from "../models/user.js";
 
-import { validatePartialUser, validateUser } from "@schemas/users";
+import { validatePartialUser, validateUser } from "../schemas/users.js";
 
 export class UserController {
 	static async getAll(_, res) {

@@ -2,6 +2,7 @@ import cors from "cors";
 import express, { json } from "express";
 
 import { articlesRouter } from "./src/routes/articles.js";
+import { usersRouter } from "./src/routes/users.js";
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(cors());
 // });
 
 app.use("/articles", articlesRouter);
+app.use("/users", usersRouter);
 
 const PORT = process.env.PORT || 1234;
 

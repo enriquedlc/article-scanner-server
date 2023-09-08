@@ -15,15 +15,6 @@ export const userSchema = z.object({
 		.min(8, "Password must be at least 8 characters long")
 		.max(20, "Password can be a maximum of 20 characters long")
 		.nonempty("Password is required"),
-	confirmPassword: z
-		.string()
-		.min(8, "Confirm password must be at least 8 characters long")
-		.max(20, "Confirm password can be a maximum of 20 characters long")
-		.nonempty("Confirm password is required")
-		.refine((value, ctx) => value === ctx.current.password, {
-			message: "Passwords do not match",
-			path: ["confirmPassword"],
-		}),
 });
 
 export function validateUser(object) {
