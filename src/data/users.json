@@ -1,0 +1,34 @@
+[
+	{
+		"id": "1",
+		"username": "johndoe",
+		"email": "johndoe@gmail.com",
+		"password": "123456",
+		"createdAt": "2023-01-01T00:00:00:000Z",
+		"updatedAt": "2023-01-01T00:00:00:000Z"
+	},
+	{
+		"id": "2",
+		"username": "janedoe",
+		"email": "janedoe@gmail.com",
+		"password": "123456",
+		"createdAt": "2023-02-02T00:00:00:000Z",
+		"updatedAt": "2023-02-02T00:00:00:000Z"
+	},
+	{
+		"id": "3",
+		"username": "johnsmith",
+		"email": "johnsmith@gmail.com",
+		"password": "123456",
+		"createdAt": "2023-03-03T00:00:00:000Z",
+		"updatedAt": "2023-03-03T00:00:00:000Z"
+	},
+	{
+		"id": "4",
+		"username": "Enrique De La Concepción",
+		"email": "enriquedlc@gmail.com",
+		"password": "123456",
+		"createdAt": "2023-04-04T00:00:00:000Z",
+		"updatedAt": "2023-04-04T00:00:00:000Z"
+	}
+]
