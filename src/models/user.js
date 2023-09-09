@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 
-import { encryptPassword } from "../lib/bcrypt.js";
+import { comparePassword, encryptPassword } from "../lib/bcrypt.js";
 import { readJSON } from "../utils/read-json.js";
 
 const users = readJSON("../data/users.json");
@@ -55,6 +55,17 @@ export class UserModel {
 		return updatedUser;
 	}
 
+	static async login({ username, password }) {
+		const user = users.find((user) => user.username === username);
+
+		if (!user) return false;
+
+		const isValidPassword = await comparePassword(password, user.password);
+
+		if (!isValidPassword) return false;
+
+		return user;
+	}
 	// TODO: patch user username
 	// TODO: patch user password
 	// TODO: patch user email
