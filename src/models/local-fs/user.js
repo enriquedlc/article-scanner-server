@@ -8,7 +8,7 @@ const users = readJSON("../data/users.json");
 
 export class UserModel {
 	static async getAll() {
-		return users;
+		return users.map((user) => userToResponseDTO(user));
 	}
 
 	static async getById(id) {
