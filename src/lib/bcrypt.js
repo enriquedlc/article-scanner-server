@@ -10,3 +10,11 @@ export const encryptPassword = async (password) => {
 		console.log(error);
 	}
 };
+
+export const comparePassword = async (password, hashedPassword) => {
+	try {
+		return bcrypt.compare(password, hashedPassword);
+	} catch (error) {
+		console.log(error);
+	}
+};

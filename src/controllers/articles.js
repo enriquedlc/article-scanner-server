@@ -1,4 +1,4 @@
-import { ArticleModel } from "../models/article.js";
+import { ArticleModel } from "../models/local-fs/article.js";
 
 import {
 	validateArticle,

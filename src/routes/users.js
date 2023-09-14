@@ -13,3 +13,5 @@ usersRouter.post("/", UserController.create);
 usersRouter.put("/:id", UserController.update);
 
 usersRouter.delete("/:id", UserController.delete);
+
+usersRouter.post("/login", UserController.login);
