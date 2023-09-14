@@ -1,34 +1,34 @@
-{
-    "compilerOptions": {
-        "baseUrl": "./src",
-        "paths": {
-            "@data/*": [
-                "data/*"
-            ],
-            "@controllers/*": [
-                "controllers/*"
-            ],
-            "@lib/*": [
-                "lib/*"
-            ],
-            "@middlewares/*": [
-                "middlewares/*"
-            ],
-            "@models/*": [
-                "models/*"
-            ],
-            "@routes/*": [
-                "routes/*"
-            ],
-            "@schemas/*": [
-                "schemas/*"
-            ],
-            "@utils/*": [
-                "utils/*"
-            ],
-            "@views/*": [
-                "views/*"
-            ],
-        }
-    }
-}
+// {
+//     "compilerOptions": {
+//         "baseUrl": "./src",
+//         "paths": {
+//             "@data/*": [
+//                 "data/*"
+//             ],
+//             "@controllers/*": [
+//                 "controllers/*"
+//             ],
+//             "@lib/*": [
+//                 "lib/*"
+//             ],
+//             "@middlewares/*": [
+//                 "middlewares/*"
+//             ],
+//             "@models/*": [
+//                 "models/*"
+//             ],
+//             "@routes/*": [
+//                 "routes/*"
+//             ],
+//             "@schemas/*": [
+//                 "schemas/*"
+//             ],
+//             "@utils/*": [
+//                 "utils/*"
+//             ],
+//             "@views/*": [
+//                 "views/*"
+//             ],
+//         }
+//     }
+// }

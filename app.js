@@ -8,8 +8,8 @@ const app = express();
 
 app.disable("x-powered-by");
 
-app.use(json());
 app.use(cors());
+app.use(json());
 
 // app.get("/", (_, res) => {
 // 	res.json({ message: "Article scanner server 📦" });
