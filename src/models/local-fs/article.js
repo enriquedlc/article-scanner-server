@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 
-import { readJSON } from "../utils/read-json.js";
+import { readJSON } from "../../utils/read-json.js";
 
 const articles = readJSON("../data/articles.json");
 

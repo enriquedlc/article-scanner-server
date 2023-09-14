@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+</head>
+
+<body>
+    <h1>User Registration</h1>
+
+    <form id="registration-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" required><br><br>
+
+        <label for="confirm-password">Confirm Password:</label>
+        <input type="password" id="confirm-password" required><br><br>
+
+        <input type="submit" value="Register">
+    </form>
+
+    <script>
+        document.getElementById('registration-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (!username || !email || !password || !confirmPassword) {
+                alert('Todos los campos son obligatorios');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+
+            const user = {
+                username: username,
+                email: email,
+                password: password
+            };
+
+
+            fetch('http://localhost:1234/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Usuario registrado exitosamente');
+                    } else {
+                        alert('Error al registrar el usuario');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+
+</html>
