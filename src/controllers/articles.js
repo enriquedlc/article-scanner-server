@@ -1,4 +1,4 @@
-import { ArticleModel } from "../models/article.js";
+import { ArticleModel } from "../models/mongodb/article.js";
 
 import {
 	validateArticle,
