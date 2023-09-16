@@ -43,10 +43,14 @@ export class ArticleModel {
 			article.warehouse,
 		]);
 
-		console.log(result);
+		return result.affectedRows === 1;
 	}
 
-	static async delete(id) {}
+	static async delete(id) {
+		const query = "DELETE FROM articles WHERE id = UUID_TO_BIN(?)";
+		const [result] = await connection.query(query, [id]);
+		return result.affectedRows === 1;
+	}
 
 	static async update({ id, article }) {}
 }

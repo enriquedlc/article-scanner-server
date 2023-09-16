@@ -65,6 +65,8 @@ export class ArticleController {
 		if (result === false)
 			return res.status(404).json({ message: "Article not found" });
 
+		console.log("hola");
+
 		res.status(204).send({
 			message: "Article deleted",
 		});
