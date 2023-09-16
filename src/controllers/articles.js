@@ -37,6 +37,7 @@ export class ArticleController {
 
 		const newArticle = await ArticleModel.create({ article: result.data });
 
+		// TODO: return article created successfully
 		res.status(201).json(newArticle);
 	}
 

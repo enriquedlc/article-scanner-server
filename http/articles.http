@@ -12,7 +12,7 @@ POST http://localhost:1234/articles
 Content-Type: application/json
 
 {
-    "name": "New Article",
+    "articleName": "New Article",
     "barcode": "1234567890123",
     "exhibition": 3,
     "shelf": 20,

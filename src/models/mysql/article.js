@@ -32,7 +32,19 @@ export class ArticleModel {
 		return article;
 	}
 
-	static async create({ article }) {}
+	static async create({ article }) {
+		const query =
+			"INSERT INTO articles (articleName, barcode, exhibition, shelf, warehouse) VALUES (?, ?, ?, ?, ?)";
+		const [result] = await connection.query(query, [
+			article.articleName,
+			article.barcode,
+			article.exhibition,
+			article.shelf,
+			article.warehouse,
+		]);
+
+		console.log(result);
+	}
 
 	static async delete(id) {}
 
