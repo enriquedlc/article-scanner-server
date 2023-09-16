@@ -25,6 +25,7 @@
 		"express": "4.18.2",
 		"mongodb": "6.0.0",
 		"mongoose": "7.5.1",
+		"mysql2": "^3.6.1",
 		"nodemon": "3.0.1",
 		"zod": "3.22.2"
 	}
