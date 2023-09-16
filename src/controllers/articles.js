@@ -20,7 +20,7 @@ export class ArticleController {
 
 	static async getById(req, res) {
 		const { id } = req.params;
-		const article = await ArticleModel.getById(id);
+		const article = await ArticleModel.getById({ id });
 
 		if (article) return res.json(article);
 

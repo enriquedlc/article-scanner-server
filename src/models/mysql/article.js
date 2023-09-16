@@ -25,7 +25,12 @@ export class ArticleModel {
 		return articles;
 	}
 
-	static async getById({ id }) {}
+	static async getById({ id }) {
+		const query =
+			"SELECT articleName, barcode, exhibition, shelf, warehouse, createdAt, updatedAt, BIN_TO_UUID(id) AS id FROM articles WHERE id = UUID_TO_BIN(?)";
+		const [article] = await connection.query(query, [id]);
+		return article;
+	}
 
 	static async create({ article }) {}
 
