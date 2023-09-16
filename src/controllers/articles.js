@@ -1,4 +1,5 @@
-import { ArticleModel } from "../models/local-fs/article.js";
+// import { ArticleModel } from "../models/local-fs/article.js";
+import { ArticleModel } from "../models/mysql/article.js";
 
 import {
 	validateArticle,
@@ -19,7 +20,7 @@ export class ArticleController {
 
 	static async getById(req, res) {
 		const { id } = req.params;
-		const article = await ArticleModel.getById(id);
+		const article = await ArticleModel.getById({ id });
 
 		if (article) return res.json(article);
 
@@ -36,6 +37,7 @@ export class ArticleController {
 
 		const newArticle = await ArticleModel.create({ article: result.data });
 
+		// TODO: return article created successfully
 		res.status(201).json(newArticle);
 	}
 
@@ -62,6 +64,8 @@ export class ArticleController {
 
 		if (result === false)
 			return res.status(404).json({ message: "Article not found" });
+
+		console.log("hola");
 
 		res.status(204).send({
 			message: "Article deleted",
