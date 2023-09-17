@@ -52,5 +52,22 @@ export class ArticleModel {
 		return result.affectedRows === 1;
 	}
 
-	static async update({ id, article }) {}
+	static async update({ id, article }) {
+		const query =
+			"UPDATE articles SET articleName = ?, barcode = ?, exhibition = ?, shelf = ?, warehouse = ? WHERE id = UUID_TO_BIN(?)";
+		const [result] = await connection.query(query, [
+			article.articleName,
+			article.barcode,
+			article.exhibition,
+			article.shelf,
+			article.warehouse,
+			id,
+		]);
+
+		if (result.affectedRows === 1) {
+			return await this.getById({ id });
+		}
+
+		console.log(result);
+	}
 }
