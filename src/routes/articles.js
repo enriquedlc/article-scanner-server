@@ -8,7 +8,7 @@ articlesRouter.get("/", ArticleController.getAll);
 
 articlesRouter.get("/:id", ArticleController.getById);
 
-articlesRouter.post("/", ArticleController.craete);
+articlesRouter.post("/", ArticleController.create);
 
 articlesRouter.put("/:id", ArticleController.update);
 

@@ -2,7 +2,7 @@
 GET http://localhost:1234/articles
 
 ### Get a specific article
-GET http://localhost:1234/articles/6be8b8aa-5408-11ee-a69a-a036bcd0d29a
+GET http://localhost:1234/articles/73dccabe-530c-11ee-9137-a036bcd0d29a
 
 ### Get articles by date
 GET http://localhost:1234/articles?createdAt=2023-09-15T15:00:00.000Z
@@ -20,16 +20,16 @@ Content-Type: application/json
 }
 
 ### Update an article
-PUT http://localhost:1234/articles/4
+PUT http://localhost:1234/articles/73dccabe-530c-11ee-9137-a036bcd0d29a
 Content-Type: application/json
 
 {
-    "name": "New Article",
+    "name": "New Article111",
     "barcode": "3434343434",
-    "exhibition": 3,
-    "shelf": 20,
-    "warehouse": 123
+    "exhibition": 111,
+    "shelf": 111,
+    "warehouse": 1111
 }
 
 ### Delete an article
-DELETE http://localhost:1234/articles/a7dcf826-54c6-11ee-9267-a036bcd0d29a
+DELETE http://localhost:1234/articles/ed726047-54c2-11ee-9267-a036bcd0d29a

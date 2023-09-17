@@ -27,7 +27,7 @@ export class ArticleController {
 		res.status(404).json({ message: "Article not found" });
 	}
 
-	static async craete(req, res) {
+	static async create(req, res) {
 		const result = validateArticle(req.body);
 
 		if (!result.success)
@@ -37,8 +37,10 @@ export class ArticleController {
 
 		const newArticle = await ArticleModel.create({ article: result.data });
 
-		// TODO: return article created successfully
-		res.status(201).json(newArticle);
+		res.status(201).json({
+			message: "Article created successfully",
+			article: newArticle,
+		});
 	}
 
 	static async update(req, res) {
@@ -62,13 +64,8 @@ export class ArticleController {
 		const { id } = req.params;
 		const result = await ArticleModel.delete(id);
 
-		if (result === false)
-			return res.status(404).json({ message: "Article not found" });
+		if (!result) return res.status(404).json({ message: "Article not found" });
 
-		console.log("hola");
-
-		res.status(204).send({
-			message: "Article deleted",
-		});
+		return res.json({ message: "Article deleted" });
 	}
 }
