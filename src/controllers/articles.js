@@ -52,6 +52,8 @@ export class ArticleController {
 				.status(400)
 				.json({ message: JSON.parse(result.error.message) });
 
+		console.log(result.data);
+
 		const updatedArticle = await ArticleModel.update({
 			id,
 			article: result.data,
