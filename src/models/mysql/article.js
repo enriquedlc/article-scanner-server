@@ -33,9 +33,12 @@ export class ArticleModel {
 	}
 
 	static async create({ article }) {
+		const uuidResult = await connection.query("SELECT UUID() uuid");
+
 		const query =
-			"INSERT INTO articles (articleName, barcode, exhibition, shelf, warehouse) VALUES (?, ?, ?, ?, ?)";
+			"INSERT INTO articles (id, articleName, barcode, exhibition, shelf, warehouse) VALUES (UUID_TO_BIN(?), ?, ?, ?, ?, ?)";
 		const [result] = await connection.query(query, [
+			uuidResult[0][0].uuid,
 			article.articleName,
 			article.barcode,
 			article.exhibition,
@@ -43,7 +46,10 @@ export class ArticleModel {
 			article.warehouse,
 		]);
 
-		return result.affectedRows === 1;
+		if (result.affectedRows === 1) {
+			const article = await this.getById({ id: uuidResult[0][0].uuid });
+			return article;
+		}
 	}
 
 	static async delete(id) {

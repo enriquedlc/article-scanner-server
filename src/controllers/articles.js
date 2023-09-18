@@ -59,7 +59,7 @@ export class ArticleController {
 			article: result.data,
 		});
 
-		res.json(updatedArticle);
+		res.json({ message: "Article updated sucessfully", data: updatedArticle });
 	}
 
 	static async delete(req, res) {

@@ -32,4 +32,4 @@ Content-Type: application/json
 }
 
 ### Delete an article
-DELETE http://localhost:1234/articles/ed726047-54c2-11ee-9267-a036bcd0d29a
+DELETE http://localhost:1234/articles/8c26ce0c-566d-11ee-9445-a036bcd0d29a
