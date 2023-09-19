@@ -1,4 +1,4 @@
-import { UserModel } from "../models/local-fs/user.js";
+import { UserModel } from "../models/mysql/user.js";
 import { validatePartialUser, validateUser } from "../schemas/users.js";
 
 export class UserController {
@@ -10,7 +10,7 @@ export class UserController {
 
 	static async getById(req, res) {
 		const { id } = req.params;
-		const user = await UserModel.getById(id);
+		const user = await UserModel.getById({ id });
 
 		if (user) return res.json(user);
 
