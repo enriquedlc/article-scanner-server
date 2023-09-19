@@ -69,15 +69,23 @@ export class UserModel {
 	}
 
 	static async login({ username, password }) {
-		const user = users.find((user) => user.username === username);
+		const query =
+			"SELECT BIN_TO_UUID(id) as id, username, password FROM users WHERE username = ?;";
+		const [result] = await connection.query(query, [username]);
 
-		if (!user) return false;
+		if (result.length === 0) {
+			return null;
+		}
 
-		const isValidPassword = await comparePassword(password, user.password);
+		const user = result[0];
 
-		if (!isValidPassword) return false;
+		const isPasswordValid = await comparePassword(password, user.password);
 
-		return user;
+		if (!isPasswordValid) {
+			return null;
+		}
+
+		return userToResponseDTO(user);
 	}
 	// TODO: patch user username
 	// TODO: patch user password
