@@ -1,4 +1,4 @@
-import { UserModel } from "../models/local-fs/user.js";
+import { UserModel } from "../models/mysql/user.js";
 import { validatePartialUser, validateUser } from "../schemas/users.js";
 
 export class UserController {
