@@ -29,56 +29,64 @@ export class UserModel {
 	}
 
 	static async create({ user }) {
-		const newUser = {
-			id: randomUUID(),
-			...user,
-			password: await encryptPassword(user.password),
-			createdAt: new Date(),
-			updatedAt: new Date(),
-		};
+		const uuidResult = await connection.query("SELECT UUID() uuid");
 
-		users.push(newUser);
+		const query =
+			"INSERT INTO users (id, username, password, email) VALUES (UUID_TO_BIN(?), ?, ?, ?);";
+		const [result] = await connection.query(query, [
+			uuidResult[0][0].uuid,
+			user.username,
+			await encryptPassword(user.password),
+			user.email,
+		]);
 
-		return userToResponseDTO(newUser);
+		if (result.affectedRows === 1) {
+			const user = await this.getById({ id: uuidResult[0][0].uuid });
+			return userToResponseDTO(user);
+		}
 	}
 
 	static async delete(id) {
-		const userIndex = users.findIndex((user) => user.id === id);
-
-		if (userIndex === -1) return false;
-
-		users.splice(userIndex, 1);
-
-		return true;
+		const query = "DELETE FROM users WHERE id = UUID_TO_BIN(?);";
+		const [result] = await connection.query(query, [id]);
+		return result.affectedRows === 1;
 	}
 
 	static async update({ id, user }) {
-		const userIndex = users.findIndex((user) => user.id === id);
+		const query =
+			"UPDATE users SET username = ?, password = ?, email = ?, updatedAt = ? WHERE id = UUID_TO_BIN(?);";
+		const [result] = await connection.query(query, [
+			user.username,
+			await encryptPassword(user.password),
+			user.email,
+			new Date(),
+			id,
+		]);
 
-		if (userIndex === -1) return false;
-
-		const updatedUser = {
-			...users[userIndex],
-			...user,
-			password: await encryptPassword(user.password),
-			updatedAt: new Date(),
-		};
-
-		users[userIndex] = updatedUser;
-
-		return updatedUser;
+		if (result.affectedRows === 1) {
+			const user = await this.getById({ id });
+			return userToResponseDTO(user);
+		}
 	}
 
 	static async login({ username, password }) {
-		const user = users.find((user) => user.username === username);
+		const query =
+			"SELECT BIN_TO_UUID(id) as id, username, password FROM users WHERE username = ?;";
+		const [result] = await connection.query(query, [username]);
 
-		if (!user) return false;
+		if (result.length === 0) {
+			return null;
+		}
 
-		const isValidPassword = await comparePassword(password, user.password);
+		const user = result[0];
 
-		if (!isValidPassword) return false;
+		const isPasswordValid = await comparePassword(password, user.password);
 
-		return user;
+		if (!isPasswordValid) {
+			return null;
+		}
+
+		return userToResponseDTO(user);
 	}
 	// TODO: patch user username
 	// TODO: patch user password

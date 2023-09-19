@@ -28,8 +28,8 @@ export class ArticleModel {
 	static async getById({ id }) {
 		const query =
 			"SELECT articleName, barcode, exhibition, shelf, warehouse, createdAt, updatedAt, BIN_TO_UUID(id) AS id FROM articles WHERE id = UUID_TO_BIN(?)";
-		const [article] = await connection.query(query, [id]);
-		return article;
+		const [result] = await connection.query(query, [id]);
+		return result[0];
 	}
 
 	static async create({ article }) {

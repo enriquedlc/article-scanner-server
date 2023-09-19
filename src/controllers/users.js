@@ -1,23 +1,29 @@
 import { UserModel } from "../models/mysql/user.js";
 import { validatePartialUser, validateUser } from "../schemas/users.js";
 
+// TODO: try catch all methods in controllers?
+
 export class UserController {
-	static async getAll(_, res) {
+	constructor({ userModel }) {
+		this.userModel = userModel;
+	}
+
+	getAll = async (_, res) => {
 		const users = await UserModel.getAll();
 
 		res.json(users);
-	}
+	};
 
-	static async getById(req, res) {
+	getById = async (req, res) => {
 		const { id } = req.params;
 		const user = await UserModel.getById({ id });
 
 		if (user) return res.json(user);
 
 		res.status(404).json({ message: "User not found" });
-	}
+	};
 
-	static async create(req, res) {
+	create = async (req, res) => {
 		const result = validateUser(req.body);
 
 		if (!result.success) return res.status(400).json({ message: result.error });
@@ -25,11 +31,11 @@ export class UserController {
 		const newUser = await UserModel.create({ user: result.data });
 
 		res.status(201).json(newUser);
-	}
+	};
 
-	static async update(req, res) {
+	update = async (req, res) => {
 		const { id } = req.params;
-		const result = validatePartialUser(req.body);
+		const result = validateUser(req.body);
 
 		if (!result.success)
 			return res
@@ -39,9 +45,9 @@ export class UserController {
 		const updatedUser = await UserModel.update({ id, user: result.data });
 
 		res.json(updatedUser);
-	}
+	};
 
-	static async delete(req, res) {
+	delete = async (req, res) => {
 		const { id } = req.params;
 
 		const deleted = await UserModel.delete(id);
@@ -49,9 +55,9 @@ export class UserController {
 		if (deleted) return res.json({ message: "User deleted" });
 
 		res.status(404).json({ message: "User not found" });
-	}
+	};
 
-	static async login(req, res) {
+	login = async (req, res) => {
 		const { username, password } = req.body;
 
 		const result = validatePartialUser({ username, password });
@@ -63,8 +69,11 @@ export class UserController {
 
 		const user = await UserModel.login({ username, password });
 
-		if (!user) return res.status(401).json({ message: "Invalid credentials" });
+		if (!user)
+			return res
+				.status(401)
+				.json({ message: "Invalid credentials", login: false, user: null });
 
-		res.json(user);
-	}
+		res.json({ message: "Logged in", login: true, user: user });
+	};
 }

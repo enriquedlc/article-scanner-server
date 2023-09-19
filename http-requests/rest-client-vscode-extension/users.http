@@ -2,7 +2,7 @@
 GET http://localhost:1234/users
 
 ### Get user by id
-GET http://localhost:1234/users/d344e38f-55b0-11ee-9445-a036bcd0d29a
+GET http://localhost:1234/users/a70fc66a-56e4-11ee-9445-a036bcd0d29a
 
 ### Create user
 POST http://localhost:1234/users
@@ -15,7 +15,7 @@ Content-Type: application/json
 }
 
 ### Update user
-PUT http://localhost:1234/users/4
+PUT http://localhost:1234/users/0fec205c-56e5-11ee-9445-a036bcd0d29a
 Content-Type: application/json
 
 {
@@ -25,4 +25,4 @@ Content-Type: application/json
 }
 
 ### Delete user
-DELETE http://localhost:1234/users/1
+DELETE http://localhost:1234/users/0fec205c-56e5-11ee-9445-a036bcd0d29a
