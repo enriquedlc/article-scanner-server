@@ -1,8 +1,11 @@
 import cors from "cors";
 import express, { json } from "express";
 
-import { articlesRouter } from "./src/routes/articles.js";
+import { createArticleRouter } from "./src/routes/articles.js";
 import { usersRouter } from "./src/routes/users.js";
+
+// import the actual madel we want to use in the app
+import { ArticleModel } from "./src/models/mysql/article.js";
 
 const app = express();
 
@@ -15,7 +18,7 @@ app.use(json());
 // 	res.json({ message: "Article scanner server 📦" });
 // });
 
-app.use("/articles", articlesRouter);
+app.use("/articles", createArticleRouter({ articleModel: ArticleModel }));
 app.use("/users", usersRouter);
 
 const PORT = process.env.PORT || 1234;
