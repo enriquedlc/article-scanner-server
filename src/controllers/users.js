@@ -1,6 +1,8 @@
 import { UserModel } from "../models/mysql/user.js";
 import { validatePartialUser, validateUser } from "../schemas/users.js";
 
+// TODO: try catch all methods in controllers?
+
 export class UserController {
 	constructor({ userModel }) {
 		this.userModel = userModel;
@@ -33,7 +35,7 @@ export class UserController {
 
 	update = async (req, res) => {
 		const { id } = req.params;
-		const result = validatePartialUser(req.body);
+		const result = validateUser(req.body);
 
 		if (!result.success)
 			return res
@@ -67,8 +69,11 @@ export class UserController {
 
 		const user = await UserModel.login({ username, password });
 
-		if (!user) return res.status(401).json({ message: "Invalid credentials" });
+		if (!user)
+			return res
+				.status(401)
+				.json({ message: "Invalid credentials", login: false, user: null });
 
-		res.json(user);
+		res.json({ message: "Logged in", login: true, user: user });
 	};
 }
