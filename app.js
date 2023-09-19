@@ -2,27 +2,22 @@ import cors from "cors";
 import express, { json } from "express";
 
 import { createArticleRouter } from "./src/routes/articles.js";
-import { usersRouter } from "./src/routes/users.js";
+import { createUserRouter } from "./src/routes/users.js";
 
-// import the actual madel we want to use in the app
-import { ArticleModel } from "./src/models/mysql/article.js";
+export const createServerApp = ({ articleModel, userModel }) => {
+	const app = express();
 
-const app = express();
+	app.disable("x-powered-by");
 
-app.disable("x-powered-by");
+	app.use(cors());
+	app.use(json());
 
-app.use(cors());
-app.use(json());
+	app.use("/articles", createArticleRouter({ articleModel }));
+	app.use("/users", createUserRouter({ userModel }));
 
-// app.get("/", (_, res) => {
-// 	res.json({ message: "Article scanner server 📦" });
-// });
+	const PORT = process.env.PORT || 1234;
 
-app.use("/articles", createArticleRouter({ articleModel: ArticleModel }));
-app.use("/users", usersRouter);
-
-const PORT = process.env.PORT || 1234;
-
-app.listen(PORT, () => {
-	console.log(`Server listening on port ${PORT}`);
-});
+	app.listen(PORT, () => {
+		console.log(`Server listening on port ${PORT}`);
+	});
+};
