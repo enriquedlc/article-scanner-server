@@ -47,13 +47,9 @@ export class UserModel {
 	}
 
 	static async delete(id) {
-		const userIndex = users.findIndex((user) => user.id === id);
-
-		if (userIndex === -1) return false;
-
-		users.splice(userIndex, 1);
-
-		return true;
+		const query = "DELETE FROM users WHERE id = UUID_TO_BIN(?);";
+		const [result] = await connection.query(query, [id]);
+		return result.affectedRows === 1;
 	}
 
 	static async update({ id, user }) {
