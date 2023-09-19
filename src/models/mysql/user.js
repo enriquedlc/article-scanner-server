@@ -21,8 +21,11 @@ export class UserModel {
 		return result;
 	}
 
-	static async getById(id) {
-		return users.find((user) => user.id === id);
+	static async getById({ id }) {
+		const query =
+			"SELECT BIN_TO_UUID(id) as id, username, email, createdAt, updatedAt FROM users WHERE id = UUID_TO_BIN(?);";
+		const [result] = await connection.query(query, [id]);
+		return result[0];
 	}
 
 	static async create({ user }) {
