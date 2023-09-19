@@ -1,6 +1,3 @@
-// import { ArticleModel } from "../models/local-fs/article.js";
-import { ArticleModel } from "../models/mysql/article.js";
-
 import {
 	validateArticle,
 	validatePartialArticle,
@@ -10,24 +7,28 @@ import {
 // for example the user that created the article
 
 export class ArticleController {
-	static async getAll(req, res) {
-		const { createdAt } = req.query;
-
-		const articles = await ArticleModel.getAll({ createdAt });
-
-		res.json(articles);
+	constructor({ articleModel }) {
+		this.articleModel = articleModel;
 	}
 
-	static async getById(req, res) {
+	getAll = async (req, res) => {
+		const { createdAt } = req.query;
+
+		const articles = await this.articleModel.getAll({ createdAt });
+
+		res.json(articles);
+	};
+
+	getById = async (req, res) => {
 		const { id } = req.params;
-		const article = await ArticleModel.getById({ id });
+		const article = await this.articleModel.getById({ id });
 
 		if (article) return res.json(article);
 
 		res.status(404).json({ message: "Article not found" });
-	}
+	};
 
-	static async create(req, res) {
+	create = async (req, res) => {
 		const result = validateArticle(req.body);
 
 		if (!result.success)
@@ -35,15 +36,15 @@ export class ArticleController {
 				.status(400)
 				.json({ message: JSON.parse(result.error.message) });
 
-		const newArticle = await ArticleModel.create({ article: result.data });
+		const newArticle = await this.articleModel.create({ article: result.data });
 
 		res.status(201).json({
 			message: "Article created successfully",
 			article: newArticle,
 		});
-	}
+	};
 
-	static async update(req, res) {
+	update = async (req, res) => {
 		const { id } = req.params;
 		const result = validatePartialArticle(req.body);
 
@@ -54,20 +55,20 @@ export class ArticleController {
 
 		console.log(result.data);
 
-		const updatedArticle = await ArticleModel.update({
+		const updatedArticle = await this.articleModel.update({
 			id,
 			article: result.data,
 		});
 
 		res.json({ message: "Article updated sucessfully", data: updatedArticle });
-	}
+	};
 
-	static async delete(req, res) {
+	delete = async (req, res) => {
 		const { id } = req.params;
-		const result = await ArticleModel.delete(id);
+		const result = await this.articleModel.delete(id);
 
 		if (!result) return res.status(404).json({ message: "Article not found" });
 
 		return res.json({ message: "Article deleted" });
-	}
+	};
 }
