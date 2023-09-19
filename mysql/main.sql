@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS articles (
     warehouse INT NOT NULL
 );
 
---INSERT 
+-- INSERT 
 INSERT INTO
     articles (
         articleName,
