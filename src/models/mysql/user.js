@@ -53,20 +53,19 @@ export class UserModel {
 	}
 
 	static async update({ id, user }) {
-		const userIndex = users.findIndex((user) => user.id === id);
+		const query =
+			"UPDATE users SET username = ?, password = ?, email = ? WHERE id = UUID_TO_BIN(?);";
+		const [result] = await connection.query(query, [
+			user.username,
+			await encryptPassword(user.password),
+			user.email,
+			id,
+		]);
 
-		if (userIndex === -1) return false;
-
-		const updatedUser = {
-			...users[userIndex],
-			...user,
-			password: await encryptPassword(user.password),
-			updatedAt: new Date(),
-		};
-
-		users[userIndex] = updatedUser;
-
-		return updatedUser;
+		if (result.affectedRows === 1) {
+			const user = await this.getById({ id });
+			return userToResponseDTO(user);
+		}
 	}
 
 	static async login({ username, password }) {
