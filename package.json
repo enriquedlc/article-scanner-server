@@ -6,7 +6,8 @@
 	"type": "module",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "nodemon ./app.js"
+		"dev:localfs": "nodemon ./server/localfs-server.js",
+		"dev:mysql": "nodemon ./server/mysql-server.js"
 	},
 	"repository": {
 		"type": "git",
