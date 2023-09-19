@@ -54,11 +54,12 @@ export class UserModel {
 
 	static async update({ id, user }) {
 		const query =
-			"UPDATE users SET username = ?, password = ?, email = ? WHERE id = UUID_TO_BIN(?);";
+			"UPDATE users SET username = ?, password = ?, email = ?, updatedAt = ? WHERE id = UUID_TO_BIN(?);";
 		const [result] = await connection.query(query, [
 			user.username,
 			await encryptPassword(user.password),
 			user.email,
+			new Date(),
 			id,
 		]);
 

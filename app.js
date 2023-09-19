@@ -2,9 +2,9 @@ import cors from "cors";
 import express, { json } from "express";
 
 import { createArticleRouter } from "./src/routes/articles.js";
-import { usersRouter } from "./src/routes/users.js";
+import { createUserRouter } from "./src/routes/users.js";
 
-export const createServerApp = ({ articleModel }) => {
+export const createServerApp = ({ articleModel, userModel }) => {
 	const app = express();
 
 	app.disable("x-powered-by");
@@ -13,7 +13,7 @@ export const createServerApp = ({ articleModel }) => {
 	app.use(json());
 
 	app.use("/articles", createArticleRouter({ articleModel }));
-	app.use("/users", usersRouter);
+	app.use("/users", createUserRouter({ userModel }));
 
 	const PORT = process.env.PORT || 1234;
 

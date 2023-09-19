@@ -6,6 +6,10 @@ import {
 // TODO: from the controller, we would call others models
 // for example the user that created the article
 
+// TODO: the articles should be paginated
+
+// TODO: the article should belong to a category
+
 export class ArticleController {
 	constructor({ articleModel }) {
 		this.articleModel = articleModel;
