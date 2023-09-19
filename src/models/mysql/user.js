@@ -29,17 +29,21 @@ export class UserModel {
 	}
 
 	static async create({ user }) {
-		const newUser = {
-			id: randomUUID(),
-			...user,
-			password: await encryptPassword(user.password),
-			createdAt: new Date(),
-			updatedAt: new Date(),
-		};
+		const uuidResult = await connection.query("SELECT UUID() uuid");
 
-		users.push(newUser);
+		const query =
+			"INSERT INTO users (id, username, password, email) VALUES (UUID_TO_BIN(?), ?, ?, ?);";
+		const [result] = await connection.query(query, [
+			uuidResult[0][0].uuid,
+			user.username,
+			await encryptPassword(user.password),
+			user.email,
+		]);
 
-		return userToResponseDTO(newUser);
+		if (result.affectedRows === 1) {
+			const user = await this.getById({ id: uuidResult[0][0].uuid });
+			return userToResponseDTO(user);
+		}
 	}
 
 	static async delete(id) {
