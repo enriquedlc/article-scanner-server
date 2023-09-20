@@ -39,6 +39,13 @@ export const articleShecma = z.object({
 		})
 		.int()
 		.min(0),
+	category: z
+		.string({
+			invalid_type_error: "Category must be a string",
+			required_error: "Category is required",
+		})
+		.min(1)
+		.max(200),
 });
 
 export function validateArticle(object) {

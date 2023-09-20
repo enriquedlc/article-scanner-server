@@ -26,6 +26,12 @@ USE articlescanner;
  "updatedAt": "2023-01-01T00:00:00:000Z"
  },
  */
+-- CATEGORIES
+CREATE TABLE IF NOT EXISTS categories (
+    id BINARY(16) PRIMARY KEY DEFAULT (UUID_TO_BIN(UUID())),
+    categoryName VARCHAR(255) NOT NULL
+);
+
 -- ARTICLES
 CREATE TABLE IF NOT EXISTS articles (
     id BINARY(16) PRIMARY KEY DEFAULT (UUID_TO_BIN(UUID())),
@@ -35,7 +41,9 @@ CREATE TABLE IF NOT EXISTS articles (
     barcode VARCHAR(255) NOT NULL,
     exhibition INT NOT NULL,
     shelf INT NOT NULL,
-    warehouse INT NOT NULL
+    warehouse INT NOT NULL,
+    categoryId BINARY(16),
+    FOREIGN KEY (categoryId) REFERENCES categories(id)
 );
 
 -- INSERT 
@@ -51,6 +59,75 @@ VALUES
     ('Artículo 1', '123456789', 1, 2, 3),
     ('Artículo 2', '987654321', 4, 5, 6),
     ('Artículo 3', '456789123', 7, 8, 9);
+
+-- INSERT CATEGORIES
+INSERT INTO
+    categories (categoryName)
+VALUES
+    ('Tornillería'),
+    ('Herramientas'),
+    ('Guantes'),
+    ('Electricidad'),
+    ('Iluminación'),
+    ('Coches'),
+    ('Bicicletas'),
+    ('Deporte'),
+    ('Ruedas'),
+    ('Carteles'),
+    ('Pesca'),
+    ('Cutters'),
+    ('Cordeltería'),
+    ('Pintura'),
+    ('Jardinería');
+
+-- SETTING CATEGORIES
+SET
+    SQL_SAFE_UPDATES = 0;
+
+UPDATE
+    articles
+SET
+    categoryId = (
+        SELECT
+            id
+        FROM
+            categories
+        WHERE
+            categoryName = 'Tornillería'
+    )
+WHERE
+    articleName = 'Artículo 1';
+
+UPDATE
+    articles
+SET
+    categoryId = (
+        SELECT
+            id
+        FROM
+            categories
+        WHERE
+            categoryName = 'Herramientas'
+    )
+WHERE
+    articleName = 'Artículo 2';
+
+UPDATE
+    articles
+SET
+    categoryId = (
+        SELECT
+            id
+        FROM
+            categories
+        WHERE
+            categoryName = 'Guantes'
+    )
+WHERE
+    articleName = 'Artículo 3';
+
+SET
+    SQL_SAFE_UPDATES = 1;
 
 --
 -- USERS
