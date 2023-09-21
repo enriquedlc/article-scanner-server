@@ -2,7 +2,7 @@
 GET http://localhost:1234/categories
 
 ### Get a specific article
-GET http://localhost:1234/categories/2
+GET http://localhost:1234/categories/d352a2af-5876-11ee-87d4-a036bcd0d29a
 
 ### Create an article
 POST http://localhost:1234/categories
@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ### Update an article
-PUT http://localhost:1234/categories/1
+PUT http://localhost:1234/categories/d352a2af-5876-11ee-87d4-a036bcd0d29a
 Content-Type: application/json
 
 {
@@ -21,4 +21,4 @@ Content-Type: application/json
 }
 
 ### Delete an article
-DELETE http://localhost:1234/categories/1
+DELETE http://localhost:1234/categories/202a056c-5877-11ee-87d4-a036bcd0d29a
