@@ -1,7 +1,7 @@
 import z from "zod";
 
 export const categorySchema = z.object({
-	name: z
+	categoryName: z
 		.string({
 			invalid_type_error: "Name must be a string",
 			required_error: "Name is required",

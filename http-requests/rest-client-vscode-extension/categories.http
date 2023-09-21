@@ -1,0 +1,24 @@
+### Get all categories
+GET http://localhost:1234/categories
+
+### Get a specific article
+GET http://localhost:1234/categories/2
+
+### Create an article
+POST http://localhost:1234/categories
+Content-Type: application/json
+
+{
+    "categoryName": "New category"
+}
+
+### Update an article
+PUT http://localhost:1234/categories/1
+Content-Type: application/json
+
+{
+    "categoryName": "updated category"
+}
+
+### Delete an article
+DELETE http://localhost:1234/categories/1

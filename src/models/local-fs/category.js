@@ -9,7 +9,7 @@ export class CategoryModel {
 		return categories;
 	}
 
-	static async getById(id) {
+	static async getById({ id }) {
 		return categories.find((category) => category.id === id);
 	}
 

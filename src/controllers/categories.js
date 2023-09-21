@@ -1,4 +1,4 @@
-import { validateCategory } from "../schemas/categories";
+import { validateCategory } from "../schemas/categories.js";
 
 export class CategoryController {
 	constructor({ categoryModel }) {
