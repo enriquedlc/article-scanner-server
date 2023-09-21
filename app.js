@@ -3,8 +3,9 @@ import express, { json } from "express";
 
 import { createArticleRouter } from "./src/routes/articles.js";
 import { createUserRouter } from "./src/routes/users.js";
+import { createCategoryRouter } from "./src/routes/categories.js";
 
-export const createServerApp = ({ articleModel, userModel }) => {
+export const createServerApp = ({ articleModel, userModel, categoryModel }) => {
 	const app = express();
 
 	app.disable("x-powered-by");
@@ -14,6 +15,7 @@ export const createServerApp = ({ articleModel, userModel }) => {
 
 	app.use("/articles", createArticleRouter({ articleModel }));
 	app.use("/users", createUserRouter({ userModel }));
+	app.use("/categories", createCategoryRouter({ categoryModel }));
 
 	const PORT = process.env.PORT || 1234;
 

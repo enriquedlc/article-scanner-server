@@ -1,0 +1,17 @@
+[
+	{ "id": "1", "categoryName": "Tornillería" },
+	{ "id": "2", "categoryName": "Herramientas" },
+	{ "id": "3", "categoryName": "Guantes" },
+	{ "id": "4", "categoryName": "Electricidad" },
+	{ "id": "5", "categoryName": "Iluminación" },
+	{ "id": "6", "categoryName": "Coches" },
+	{ "id": "7", "categoryName": "Bicicletas" },
+	{ "id": "8", "categoryName": "Deporte" },
+	{ "id": "9", "categoryName": "Ruedas" },
+	{ "id": "10", "categoryName": "Carteles" },
+	{ "id": "11", "categoryName": "Pesca" },
+	{ "id": "12", "categoryName": "Cutters" },
+	{ "id": "13", "categoryName": "Cordeltería" },
+	{ "id": "14", "categoryName": "Pintura" },
+	{ "id": "15", "categoryName": "Jardinería" }
+]
