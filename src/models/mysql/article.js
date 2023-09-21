@@ -69,8 +69,18 @@ export class ArticleModel {
 	}
 
 	static async update({ id, article }) {
+		const articleCategoryQuery =
+			"SELECT BIN_TO_UUID(id) AS id FROM categories WHERE categoryName = ?";
+		const [categoryResult] = await connection.query(articleCategoryQuery, [
+			article.category.categoryName,
+		]);
+
+		console.log(article.category.categoryName);
+
+		console.log(categoryResult[0].id);
+
 		const query =
-			"UPDATE articles SET articleName = ?, barcode = ?, exhibition = ?, shelf = ?, warehouse = ?, updatedAt = ? WHERE id = UUID_TO_BIN(?)";
+			"UPDATE articles SET articleName = ?, barcode = ?, exhibition = ?, shelf = ?, warehouse = ?, updatedAt = ?, categoryId = UUID_TO_BIN(?) WHERE id = UUID_TO_BIN(?)";
 		const [result] = await connection.query(query, [
 			article.articleName,
 			article.barcode,
@@ -78,6 +88,7 @@ export class ArticleModel {
 			article.shelf,
 			article.warehouse,
 			new Date(),
+			categoryResult[0].id,
 			id,
 		]);
 
