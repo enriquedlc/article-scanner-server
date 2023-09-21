@@ -8,8 +8,6 @@ import {
 
 // TODO: the articles should be paginated
 
-// TODO: the article should belong to a category
-
 export class ArticleController {
 	constructor({ articleModel }) {
 		this.articleModel = articleModel;
