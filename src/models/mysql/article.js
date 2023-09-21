@@ -13,7 +13,7 @@ const connection = await mysql.createConnection(configuration);
 export class ArticleModel {
 	static async getAll({ createdAt }) {
 		let query =
-			"SELECT articleName, barcode, exhibition, shelf, warehouse, createdAt, updatedAt, BIN_TO_UUID(id) AS id FROM articles";
+			"SELECT BIN_TO_UUID(id) AS id, articleName, barcode, exhibition, shelf, warehouse, createdAt, updatedAt, BIN_TO_UUID(categoryId) as categoryId FROM articles";
 
 		if (createdAt) {
 			query += " WHERE createdAt >= ?";
@@ -27,16 +27,25 @@ export class ArticleModel {
 
 	static async getById({ id }) {
 		const query =
-			"SELECT articleName, barcode, exhibition, shelf, warehouse, createdAt, updatedAt, BIN_TO_UUID(id) AS id FROM articles WHERE id = UUID_TO_BIN(?)";
+			"SELECT BIN_TO_UUID(id) AS id, articleName, barcode, exhibition, shelf, warehouse, createdAt, updatedAt, BIN_TO_UUID(categoryId) as categoryId FROM articles WHERE id = UUID_TO_BIN(?)";
 		const [result] = await connection.query(query, [id]);
+		console.log(result[0]);
 		return result[0];
 	}
 
 	static async create({ article }) {
 		const uuidResult = await connection.query("SELECT UUID() uuid");
 
+		const articleCategoryQuery =
+			"SELECT BIN_TO_UUID(id) AS id FROM categories WHERE categoryName = ?";
+		const [categoryResult] = await connection.query(articleCategoryQuery, [
+			article.category.categoryName,
+		]);
+
+		console.log(categoryResult[0].id);
+
 		const query =
-			"INSERT INTO articles (id, articleName, barcode, exhibition, shelf, warehouse) VALUES (UUID_TO_BIN(?), ?, ?, ?, ?, ?)";
+			"INSERT INTO articles (id, articleName, barcode, exhibition, shelf, warehouse, categoryId) VALUES (UUID_TO_BIN(?), ?, ?, ?, ?, ?, UUID_TO_BIN(?))";
 		const [result] = await connection.query(query, [
 			uuidResult[0][0].uuid,
 			article.articleName,
@@ -44,6 +53,7 @@ export class ArticleModel {
 			article.exhibition,
 			article.shelf,
 			article.warehouse,
+			categoryResult[0].id,
 		]);
 
 		if (result.affectedRows === 1) {

@@ -29,7 +29,7 @@ USE articlescanner;
 -- CATEGORIES
 CREATE TABLE IF NOT EXISTS categories (
     id BINARY(16) PRIMARY KEY DEFAULT (UUID_TO_BIN(UUID())),
-    categoryName VARCHAR(255) NOT NULL
+    categoryName VARCHAR(255) NOT NULL UNIQUE
 );
 
 -- ARTICLES
