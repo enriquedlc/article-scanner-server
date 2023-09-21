@@ -12,16 +12,26 @@ const connection = await mysql.createConnection(configuration);
 
 export class ArticleModel {
 	static async getAll({ createdAt }) {
-		let query =
+		const query =
 			"SELECT BIN_TO_UUID(id) AS id, articleName, barcode, exhibition, shelf, warehouse, createdAt, updatedAt, BIN_TO_UUID(categoryId) as categoryId FROM articles";
 
+		const [articles] = await connection.query(query);
+
 		if (createdAt) {
-			query += " WHERE createdAt >= ?";
-			const [articles] = await connection.query(query, [createdAt]);
-			return articles;
+			console.log(typeof createdAt);
+			console.log(typeof articles[3].createdAt.toString());
+			console.log(createdAt === articles[3].createdAt.toString());
+			console.log(
+				new Date(createdAt).toISOString(),
+				new Date(articles[3].createdAt).toISOString(),
+			);
+			return articles.filter(
+				(article) =>
+					new Date(article.createdAt).toISOString() >=
+					new Date(articles[3].createdAt).toISOString(),
+			);
 		}
 
-		const [articles] = await connection.query(query);
 		return articles;
 	}
 

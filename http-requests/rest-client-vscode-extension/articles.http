@@ -5,7 +5,7 @@ GET http://localhost:1234/articles
 GET http://localhost:1234/articles/c78e8c07-5897-11ee-87d4-a036bcd0d29a
 
 ### Get articles by date
-GET http://localhost:1234/articles?createdAt=2023-09-15T15:00:00.000Z
+GET http://localhost:1234/articles?createdAt=2023-09-21T17:04:42.000Z
 
 ### Create an article
 POST http://localhost:1234/articles
