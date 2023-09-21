@@ -35,6 +35,8 @@ export class ArticleController {
 	create = async (req, res) => {
 		const result = validateArticle(req.body);
 
+		console.log(req.body);
+
 		if (!result.success)
 			return res
 				.status(400)

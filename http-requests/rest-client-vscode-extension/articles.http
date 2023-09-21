@@ -16,7 +16,10 @@ Content-Type: application/json
     "barcode": "1234567890123",
     "exhibition": 3,
     "shelf": 20,
-    "warehouse": 100
+    "warehouse": 100,
+    "category": {
+        "categoryName": "Ferretería"
+    }
 }
 
 ### Update an article

@@ -1,4 +1,5 @@
 import z from "zod";
+import { categorySchema } from "./categories.js";
 
 export const articleShecma = z.object({
 	articleName: z
@@ -39,13 +40,10 @@ export const articleShecma = z.object({
 		})
 		.int()
 		.min(0),
-	category: z
-		.string({
-			invalid_type_error: "Category must be a string",
-			required_error: "Category is required",
-		})
-		.min(1)
-		.max(200),
+	category: categorySchema.refine((value) => {
+		const result = categorySchema.safeParse(value);
+		return result.success;
+	}, "Invalid category"),
 });
 
 export function validateArticle(object) {

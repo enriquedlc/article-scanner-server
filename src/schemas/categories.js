@@ -1,13 +1,27 @@
 import z from "zod";
 
 export const categorySchema = z.object({
-	categoryName: z
-		.string({
-			invalid_type_error: "Name must be a string",
-			required_error: "Name is required",
-		})
-		.min(1)
-		.max(50),
+	categoryName: z.enum(
+		[
+			"Tornillería",
+			"Herramientas",
+			"Ferretería",
+			"Guantes",
+			"Electricidad",
+			"Iluminación",
+			"Coches",
+			"Bicicletas",
+			"Deporte",
+			"Ruedas",
+			"Carteles",
+			"Pesca",
+			"Cutters",
+			"Cordeltería",
+			"Pintura",
+			"Jardinería",
+		],
+		"Invalid category name",
+	),
 });
 
 export function validateCategory(object) {

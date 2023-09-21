@@ -9,7 +9,7 @@ POST http://localhost:1234/categories
 Content-Type: application/json
 
 {
-    "categoryName": "New category"
+    "categoryName": "Ferretería"
 }
 
 ### Update an article
@@ -17,7 +17,7 @@ PUT http://localhost:1234/categories/1
 Content-Type: application/json
 
 {
-    "categoryName": "updated category"
+    "categoryName": "Tornillería"
 }
 
 ### Delete an article
