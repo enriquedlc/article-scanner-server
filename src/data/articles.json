@@ -7,7 +7,8 @@
 		"barcode": "1111",
 		"exhibition": 5,
 		"shelf": 20,
-		"warehouse": 100
+		"warehouse": 100,
+		"category": "Tornillería"
 	},
 	{
 		"id": "2",
@@ -17,7 +18,8 @@
 		"barcode": "2222",
 		"exhibition": 8,
 		"shelf": 15,
-		"warehouse": 75
+		"warehouse": 75,
+		"category": "Herramientas"
 	},
 	{
 		"id": "3",
@@ -27,7 +29,8 @@
 		"barcode": "3333",
 		"exhibition": 3,
 		"shelf": 10,
-		"warehouse": 50
+		"warehouse": 50,
+		"category": "Guantes"
 	},
 	{
 		"id": "4",
@@ -37,7 +40,8 @@
 		"barcode": "4444",
 		"exhibition": 6,
 		"shelf": 18,
-		"warehouse": 90
+		"warehouse": 90,
+		"category": "Electricidad"
 	},
 	{
 		"id": "5",
@@ -47,7 +51,8 @@
 		"barcode": "5555",
 		"exhibition": 7,
 		"shelf": 12,
-		"warehouse": 60
+		"warehouse": 60,
+		"category": "Iluminación"
 	},
 	{
 		"id": "6",
@@ -57,7 +62,8 @@
 		"barcode": "6666",
 		"exhibition": 4,
 		"shelf": 22,
-		"warehouse": 110
+		"warehouse": 110,
+		"category": "Coches"
 	},
 	{
 		"id": "7",
@@ -67,7 +73,8 @@
 		"barcode": "7777",
 		"exhibition": 9,
 		"shelf": 14,
-		"warehouse": 70
+		"warehouse": 70,
+		"category": "Bicicletas"
 	},
 	{
 		"id": "8",
@@ -77,7 +84,8 @@
 		"barcode": "8888",
 		"exhibition": 2,
 		"shelf": 25,
-		"warehouse": 125
+		"warehouse": 125,
+		"category": "Deporte"
 	},
 	{
 		"id": "9",
@@ -87,7 +95,8 @@
 		"barcode": "9999",
 		"exhibition": 7,
 		"shelf": 16,
-		"warehouse": 80
+		"warehouse": 80,
+		"category": "Ruedas"
 	},
 	{
 		"id": "10",
@@ -97,6 +106,7 @@
 		"barcode": "0000",
 		"exhibition": 6,
 		"shelf": 20,
-		"warehouse": 100
+		"warehouse": 100,
+		"category": "Carteles"
 	}
 ]
