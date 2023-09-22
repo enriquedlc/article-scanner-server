@@ -73,4 +73,11 @@ export class ArticleController {
 
 		return res.json({ message: "Article deleted" });
 	};
+
+	getByUsername = async (req, res) => {
+		const { username } = req.params;
+		const articles = await this.articleModel.getByUsername({ username });
+
+		res.json(articles);
+	};
 }

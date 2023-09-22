@@ -106,4 +106,28 @@ export class ArticleModel {
 			return await this.getById({ id });
 		}
 	}
+
+	static async getArticlesByUsername({ username }) {
+		const query = `
+			SELECT
+				BIN_TO_UUID(a.id) AS id,
+				a.articleName,
+				a.barcode,
+				a.exhibition,
+				a.shelf,
+				a.warehouse,
+				a.createdAt,
+				a.updatedAt,
+				BIN_TO_UUID(a.categoryId) AS categoryId
+			FROM
+				articles a
+				JOIN user_articles ON a.id = user_articles.article_id
+				JOIN users u ON user_articles.user_id = u.id
+			WHERE
+				u.username = ?;`;
+
+		const [result] = await connection.query(query, [username]);
+
+		return result;
+	}
 }
