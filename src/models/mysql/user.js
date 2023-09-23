@@ -88,7 +88,41 @@ export class UserModel {
 
 		return userToResponseDTO(user);
 	}
-	// TODO: patch user username
-	// TODO: patch user password
-	// TODO: patch user email
+
+	static async patchUsername({ id, username }) {
+		const query =
+			"UPDATE users SET username = ?, updatedAt = ? WHERE id = UUID_TO_BIN(?);";
+		const [result] = await connection.query(query, [username, new Date(), id]);
+
+		if (result.affectedRows === 1) {
+			const user = await this.getById({ id });
+			return userToResponseDTO(user);
+		}
+	}
+
+	static async patchPassword({ id, password }) {
+		const query =
+			"UPDATE users SET password = ?, updatedAt = ? WHERE id = UUID_TO_BIN(?);";
+		const [result] = await connection.query(query, [
+			await encryptPassword(password),
+			new Date(),
+			id,
+		]);
+
+		if (result.affectedRows === 1) {
+			const user = await this.getById({ id });
+			return userToResponseDTO(user);
+		}
+	}
+
+	static async patchEmail({ id, email }) {
+		const query =
+			"UPDATE users SET email = ?, updatedAt = ? WHERE id = UUID_TO_BIN(?);";
+		const [result] = await connection.query(query, [email, new Date(), id]);
+
+		if (result.affectedRows === 1) {
+			const user = await this.getById({ id });
+			return userToResponseDTO(user);
+		}
+	}
 }
