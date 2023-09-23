@@ -67,7 +67,4 @@ export class UserModel {
 
 		return user;
 	}
-	// TODO: patch user username
-	// TODO: patch user password
-	// TODO: patch user email
 }
