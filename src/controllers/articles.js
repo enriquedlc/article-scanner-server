@@ -3,9 +3,6 @@ import {
 	validatePartialArticle,
 } from "../schemas/articles.js";
 
-// TODO: from the controller, we would call others models
-// for example the user that created the article
-
 // TODO: the articles should be paginated
 
 export class ArticleController {
