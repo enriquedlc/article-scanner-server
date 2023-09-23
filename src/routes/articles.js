@@ -17,5 +17,7 @@ export const createArticleRouter = ({ articleModel }) => {
 
 	articlesRouter.delete("/:id", articleController.delete);
 
+	articlesRouter.get("/user/:userId", articleController.getArticlesByUser);
+
 	return articlesRouter;
 };

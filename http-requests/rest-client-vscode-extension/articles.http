@@ -7,6 +7,9 @@ GET http://localhost:1234/articles/c78e8c07-5897-11ee-87d4-a036bcd0d29a
 ### Get articles by date
 GET http://localhost:1234/articles?createdAt=2023-09-21T17:04:42.000Z
 
+### Get articles by username
+GET http://localhost:1234/articles/user/8765432a-5a3e-11ee-832e-a036bcd0d29a
+
 ### Create an article
 POST http://localhost:1234/articles
 Content-Type: application/json

@@ -74,10 +74,33 @@ export class ArticleController {
 		return res.json({ message: "Article deleted" });
 	};
 
-	getByUsername = async (req, res) => {
-		const { username } = req.params;
-		const articles = await this.articleModel.getByUsername({ username });
+	getArticlesByUser = async (req, res) => {
+		console.log(req.params);
+		const { userId } = req.params;
+		const articles = await this.articleModel.getArticlesByUser({
+			userId,
+		});
 
 		res.json(articles);
+	};
+
+	createArticleForUser = async (req, res) => {
+		const { userId } = req.params;
+		const result = validateArticle(req.body);
+
+		if (!result.success)
+			return res
+				.status(400)
+				.json({ message: JSON.parse(result.error.message) });
+
+		const newArticle = await this.articleModel.createArticleForUser({
+			userId,
+			article: result.data,
+		});
+
+		res.status(201).json({
+			message: "Article created successfully",
+			article: newArticle,
+		});
 	};
 }

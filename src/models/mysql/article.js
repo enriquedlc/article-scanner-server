@@ -18,13 +18,6 @@ export class ArticleModel {
 		const [articles] = await connection.query(query);
 
 		if (createdAt) {
-			console.log(typeof createdAt);
-			console.log(typeof articles[3].createdAt.toString());
-			console.log(createdAt === articles[3].createdAt.toString());
-			console.log(
-				new Date(createdAt).toISOString(),
-				new Date(articles[3].createdAt).toISOString(),
-			);
 			return articles.filter(
 				(article) =>
 					new Date(article.createdAt).toISOString() >=
@@ -107,7 +100,7 @@ export class ArticleModel {
 		}
 	}
 
-	static async getArticlesByUsername({ username }) {
+	static async getArticlesByUser({ userId }) {
 		const query = `
 			SELECT
 				BIN_TO_UUID(a.id) AS id,
@@ -118,16 +111,36 @@ export class ArticleModel {
 				a.warehouse,
 				a.createdAt,
 				a.updatedAt,
-				BIN_TO_UUID(a.categoryId) AS categoryId
+				c.categoryName
 			FROM
 				articles a
-				JOIN user_articles ON a.id = user_articles.article_id
-				JOIN users u ON user_articles.user_id = u.id
+				JOIN user_articles ua ON a.id = ua.article_id
+				JOIN users u ON ua.user_id = u.id
+				JOIN categories c ON a.categoryId = c.id
 			WHERE
-				u.username = ?;`;
+				u.id = UUID_TO_BIN(?);`;
 
-		const [result] = await connection.query(query, [username]);
+		const [result] = await connection.query(query, [userId]);
 
 		return result;
+	}
+
+	static async createArticleForUser({ userId, article }) {
+		const createdArticle = await this.create({ article });
+
+		if (createdArticle) {
+			const query =
+				"INSERT INTO user_articles (user_id, article_id) VALUES (?, UUID_TO_BIN(?))";
+			const [result] = await connection.query(query, [
+				userId,
+				createdArticle.id,
+			]);
+
+			if (result.affectedRows === 1) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

@@ -67,16 +67,12 @@ export class UserController {
 
 		const result = validatePartialUser({ username, password });
 
-		console.log(result);
-
 		if (!result.success)
 			return res
 				.status(400)
 				.json({ message: JSON.parse(result.error.message) });
 
 		const user = await this.userModel.login({ username, password });
-
-		console.log(user);
 
 		if (!user)
 			return res
