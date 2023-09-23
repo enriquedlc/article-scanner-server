@@ -88,7 +88,18 @@ export class UserModel {
 
 		return userToResponseDTO(user);
 	}
-	// TODO: patch user username
+
+	static async patchUsername({ id, username }) {
+		const query =
+			"UPDATE users SET username = ?, updatedAt = ? WHERE id = UUID_TO_BIN(?);";
+		const [result] = await connection.query(query, [username, new Date(), id]);
+
+		if (result.affectedRows === 1) {
+			const user = await this.getById({ id });
+			return userToResponseDTO(user);
+		}
+	}
+
 	// TODO: patch user password
 	// TODO: patch user email
 }

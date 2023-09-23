@@ -81,4 +81,26 @@ export class UserController {
 
 		res.json({ message: "Logged in", login: true, user: user });
 	};
+
+	updateUsername = async (req, res) => {
+		const { id } = req.params;
+		const { username } = req.body;
+
+		const result = validatePartialUser({ username });
+
+		if (!result.success)
+			return res
+				.status(400)
+				.json({ message: JSON.parse(result.error.message) });
+
+		const updatedUser = await this.userModel.patchUsername({ id, username });
+
+		if (!updatedUser)
+			return res.status(404).json({ message: "User not found" });
+
+		res.json({
+			message: "Username updated successfully",
+			user: updatedUser,
+		});
+	};
 }
