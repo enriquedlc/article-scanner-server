@@ -100,6 +100,20 @@ export class UserModel {
 		}
 	}
 
-	// TODO: patch user password
+	static async patchPassword({ id, password }) {
+		const query =
+			"UPDATE users SET password = ?, updatedAt = ? WHERE id = UUID_TO_BIN(?);";
+		const [result] = await connection.query(query, [
+			await encryptPassword(password),
+			new Date(),
+			id,
+		]);
+
+		if (result.affectedRows === 1) {
+			const user = await this.getById({ id });
+			return userToResponseDTO(user);
+		}
+	}
+
 	// TODO: patch user email
 }

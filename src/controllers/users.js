@@ -103,4 +103,26 @@ export class UserController {
 			user: updatedUser,
 		});
 	};
+
+	updatePassword = async (req, res) => {
+		const { id } = req.params;
+		const { password } = req.body;
+
+		const result = validatePartialUser({ password });
+
+		if (!result.success)
+			return res
+				.status(400)
+				.json({ message: JSON.parse(result.error.message) });
+
+		const updatedUser = await this.userModel.patchPassword({ id, password });
+
+		if (!updatedUser)
+			return res.status(404).json({ message: "User not found" });
+
+		res.json({
+			message: "Password updated successfully",
+			user: updatedUser,
+		});
+	};
 }

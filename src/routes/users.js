@@ -19,7 +19,9 @@ export const createUserRouter = ({ userModel }) => {
 
 	usersRouter.post("/login", userController.login);
 
-	usersRouter.patch("/:id", userController.updateUsername);
+	usersRouter.patch("/username/:id", userController.updateUsername);
+
+	usersRouter.patch("/password/:id", userController.updatePassword);
 
 	return usersRouter;
 };
