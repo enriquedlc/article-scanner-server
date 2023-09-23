@@ -55,8 +55,6 @@ export class ArticleController {
 				.status(400)
 				.json({ message: JSON.parse(result.error.message) });
 
-		console.log(result.data);
-
 		const updatedArticle = await this.articleModel.update({
 			id,
 			article: result.data,
@@ -75,7 +73,6 @@ export class ArticleController {
 	};
 
 	getArticlesByUser = async (req, res) => {
-		console.log(req.params);
 		const { userId } = req.params;
 		const articles = await this.articleModel.getArticlesByUser({
 			userId,
@@ -85,8 +82,8 @@ export class ArticleController {
 	};
 
 	createArticleForUser = async (req, res) => {
-		const { userId } = req.params;
-		const result = validateArticle(req.body);
+		const userId = req.body.userId;
+		const result = validateArticle(req.body.article);
 
 		if (!result.success)
 			return res

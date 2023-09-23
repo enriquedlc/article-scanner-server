@@ -32,7 +32,7 @@ export class ArticleModel {
 		const query =
 			"SELECT BIN_TO_UUID(id) AS id, articleName, barcode, exhibition, shelf, warehouse, createdAt, updatedAt, BIN_TO_UUID(categoryId) as categoryId FROM articles WHERE id = UUID_TO_BIN(?)";
 		const [result] = await connection.query(query, [id]);
-		console.log(result[0]);
+
 		return result[0];
 	}
 
@@ -44,8 +44,6 @@ export class ArticleModel {
 		const [categoryResult] = await connection.query(articleCategoryQuery, [
 			article.category.categoryName,
 		]);
-
-		console.log(categoryResult[0].id);
 
 		const query =
 			"INSERT INTO articles (id, articleName, barcode, exhibition, shelf, warehouse, categoryId) VALUES (UUID_TO_BIN(?), ?, ?, ?, ?, ?, UUID_TO_BIN(?))";
@@ -77,10 +75,6 @@ export class ArticleModel {
 		const [categoryResult] = await connection.query(articleCategoryQuery, [
 			article.category.categoryName,
 		]);
-
-		console.log(article.category.categoryName);
-
-		console.log(categoryResult[0].id);
 
 		const query =
 			"UPDATE articles SET articleName = ?, barcode = ?, exhibition = ?, shelf = ?, warehouse = ?, updatedAt = ?, categoryId = UUID_TO_BIN(?) WHERE id = UUID_TO_BIN(?)";
@@ -130,14 +124,14 @@ export class ArticleModel {
 
 		if (createdArticle) {
 			const query =
-				"INSERT INTO user_articles (user_id, article_id) VALUES (?, UUID_TO_BIN(?))";
+				"INSERT INTO user_articles (user_id, article_id) VALUES (UUID_TO_BIN(?), UUID_TO_BIN(?))";
 			const [result] = await connection.query(query, [
 				userId,
 				createdArticle.id,
 			]);
 
 			if (result.affectedRows === 1) {
-				return true;
+				return createdArticle;
 			}
 		}
 

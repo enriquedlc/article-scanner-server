@@ -11,7 +11,7 @@ export const createArticleRouter = ({ articleModel }) => {
 
 	articlesRouter.get("/:id", articleController.getById);
 
-	articlesRouter.post("/", articleController.create);
+	articlesRouter.post("/", articleController.createArticleForUser);
 
 	articlesRouter.put("/:id", articleController.update);
 
