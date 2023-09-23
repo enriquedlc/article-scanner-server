@@ -43,7 +43,13 @@ export class UserController {
 
 		const updatedUser = await this.userModel.update({ id, user: result.data });
 
-		res.json(updatedUser);
+		if (!updatedUser)
+			return res.status(404).json({ message: "User not found" });
+
+		res.json({
+			message: "User updated successfully",
+			user: updatedUser,
+		});
 	};
 
 	delete = async (req, res) => {
