@@ -4,28 +4,6 @@ CREATE DATABASE IF NOT EXISTS articlescanner;
 
 USE articlescanner;
 
-/*
- {
- "id": "1",
- "createdAt": "2023-01-01T15:00:00.000Z",
- "updatedAt": "2023-01-01T15:00:00.000Z",
- "name": "Artículo 1",
- "barcode": "1111",
- "exhibition": 5,
- "shelf": 20,
- "warehouse": 100
- },
- */
-/*
- {
- "id": "1",
- "username": "johndoe",
- "email": "johndoe@gmail.com",
- "password": "123456",
- "createdAt": "2023-01-01T00:00:00:000Z",
- "updatedAt": "2023-01-01T00:00:00:000Z"
- },
- */
 -- CATEGORIES
 CREATE TABLE IF NOT EXISTS categories (
     id BINARY(16) PRIMARY KEY DEFAULT (UUID_TO_BIN(UUID())),
@@ -56,9 +34,12 @@ INSERT INTO
         warehouse
     )
 VALUES
-    ('Artículo 1', '123456789', 1, 2, 3),
-    ('Artículo 2', '987654321', 4, 5, 6),
-    ('Artículo 3', '456789123', 7, 8, 9);
+    ('Artículo 1', '111456789', 1, 2, 3),
+    ('Artículo 2', '222654321', 4, 5, 6),
+    ('Artículo 3', '333789123', 7, 8, 9),
+    ('Artículo 4', '444856736', 10, 11, 12),
+    ('Artículo 5', '555528451', 13, 14, 15),
+    ('Artículo 6', '666930564', 16, 17, 18);
 
 -- INSERT CATEGORIES
 INSERT INTO
@@ -158,6 +139,12 @@ CREATE TABLE IF NOT EXISTS user_articles (
     FOREIGN KEY (article_id) REFERENCES articles(id)
 );
 
+-- Add unique constraint to article_id
+ALTER TABLE
+    user_articles
+ADD
+    CONSTRAINT unique_article_id UNIQUE (article_id);
+
 -- INSERT
 INSERT INTO
     user_articles (user_id, article_id)
@@ -187,7 +174,7 @@ VALUES
             FROM
                 users
             WHERE
-                username = 'Usuario1'
+                username = 'Usuario2'
         ),
         (
             SELECT
@@ -231,7 +218,7 @@ VALUES
             FROM
                 articles
             WHERE
-                articleName = 'Artículo 1'
+                articleName = 'Artículo 4'
         )
     ),
     (
@@ -249,7 +236,7 @@ VALUES
             FROM
                 articles
             WHERE
-                articleName = 'Artículo 2'
+                articleName = 'Artículo 5'
         )
     ),
     (
@@ -267,8 +254,6 @@ VALUES
             FROM
                 articles
             WHERE
-                articleName = 'Artículo 3'
+                articleName = 'Artículo 6'
         )
     );
-
---

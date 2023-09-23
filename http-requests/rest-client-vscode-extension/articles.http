@@ -2,7 +2,7 @@
 GET http://localhost:1234/articles
 
 ### Get a specific article
-GET http://localhost:1234/articles/c78e8c07-5897-11ee-87d4-a036bcd0d29a
+GET http://localhost:1234/articles/8a70c5a3-5a43-11ee-832e-a036bcd0d29a
 
 ### Get articles by date
 GET http://localhost:1234/articles?createdAt=2023-09-21T17:04:42.000Z
@@ -12,7 +12,7 @@ POST http://localhost:1234/articles
 Content-Type: application/json
 
 {
-    "userId": "87654a32-5a3e-11ee-832e-a036bcd0d29a",
+    "userId": "d32a6848-5a46-11ee-832e-a036bcd0d29a",
     "article": {
         "articleName": "New Article 121 21 22 1",
         "barcode": "1234567890123",
@@ -26,7 +26,7 @@ Content-Type: application/json
 }
 
 ### Update an article
-PUT http://localhost:1234/articles/c78e8c07-5897-11ee-87d4-a036bcd0d29a
+PUT http://localhost:1234/articles/8a70c5a3-5a43-11ee-832e-a036bcd0d29a
 Content-Type: application/json
 
 {
@@ -46,4 +46,4 @@ DELETE http://localhost:1234/articles/1
 // specific for users
 
 ### Get articles by username
-GET http://localhost:1234/articles/user/8765432a-5a3e-11ee-832e-a036bcd0d29a
+GET http://localhost:1234/articles/user/3b512e37-5a47-11ee-832e-a036bcd0d29a
