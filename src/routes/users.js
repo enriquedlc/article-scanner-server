@@ -23,5 +23,7 @@ export const createUserRouter = ({ userModel }) => {
 
 	usersRouter.patch("/password/:id", userController.updatePassword);
 
+	usersRouter.patch("/email/:id", userController.updateEmail);
+
 	return usersRouter;
 };

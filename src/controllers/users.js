@@ -125,4 +125,26 @@ export class UserController {
 			user: updatedUser,
 		});
 	};
+
+	updateEmail = async (req, res) => {
+		const { id } = req.params;
+		const { email } = req.body;
+
+		const result = validatePartialUser({ email });
+
+		if (!result.success)
+			return res
+				.status(400)
+				.json({ message: JSON.parse(result.error.message) });
+
+		const updatedUser = await this.userModel.patchEmail({ id, email });
+
+		if (!updatedUser)
+			return res.status(404).json({ message: "User not found" });
+
+		res.json({
+			message: "Email updated successfully",
+			user: updatedUser,
+		});
+	};
 }

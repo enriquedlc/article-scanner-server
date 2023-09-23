@@ -49,5 +49,13 @@ PATCH http://localhost:1234/users/password/3b5129fc-5a47-11ee-832e-a036bcd0d29a
 Content-Type: application/json
 
 {
-    "password": "fasdfasdfasdfas"
+    "password": "123412341234"
+}
+
+### patch email
+PATCH http://localhost:1234/users/email/3b5129fc-5a47-11ee-832e-a036bcd0d29a
+Content-Type: application/json
+
+{
+    "email": "patchedemail@gmail.com"
 }
