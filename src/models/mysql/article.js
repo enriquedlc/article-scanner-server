@@ -18,13 +18,6 @@ export class ArticleModel {
 		const [articles] = await connection.query(query);
 
 		if (createdAt) {
-			console.log(typeof createdAt);
-			console.log(typeof articles[3].createdAt.toString());
-			console.log(createdAt === articles[3].createdAt.toString());
-			console.log(
-				new Date(createdAt).toISOString(),
-				new Date(articles[3].createdAt).toISOString(),
-			);
 			return articles.filter(
 				(article) =>
 					new Date(article.createdAt).toISOString() >=
@@ -39,7 +32,7 @@ export class ArticleModel {
 		const query =
 			"SELECT BIN_TO_UUID(id) AS id, articleName, barcode, exhibition, shelf, warehouse, createdAt, updatedAt, BIN_TO_UUID(categoryId) as categoryId FROM articles WHERE id = UUID_TO_BIN(?)";
 		const [result] = await connection.query(query, [id]);
-		console.log(result[0]);
+
 		return result[0];
 	}
 
@@ -51,8 +44,6 @@ export class ArticleModel {
 		const [categoryResult] = await connection.query(articleCategoryQuery, [
 			article.category.categoryName,
 		]);
-
-		console.log(categoryResult[0].id);
 
 		const query =
 			"INSERT INTO articles (id, articleName, barcode, exhibition, shelf, warehouse, categoryId) VALUES (UUID_TO_BIN(?), ?, ?, ?, ?, ?, UUID_TO_BIN(?))";
@@ -85,10 +76,6 @@ export class ArticleModel {
 			article.category.categoryName,
 		]);
 
-		console.log(article.category.categoryName);
-
-		console.log(categoryResult[0].id);
-
 		const query =
 			"UPDATE articles SET articleName = ?, barcode = ?, exhibition = ?, shelf = ?, warehouse = ?, updatedAt = ?, categoryId = UUID_TO_BIN(?) WHERE id = UUID_TO_BIN(?)";
 		const [result] = await connection.query(query, [
@@ -105,5 +92,49 @@ export class ArticleModel {
 		if (result.affectedRows === 1) {
 			return await this.getById({ id });
 		}
+	}
+
+	static async getArticlesByUser({ userId }) {
+		const query = `
+			SELECT
+				BIN_TO_UUID(a.id) AS id,
+				a.articleName,
+				a.barcode,
+				a.exhibition,
+				a.shelf,
+				a.warehouse,
+				a.createdAt,
+				a.updatedAt,
+				c.categoryName
+			FROM
+				articles a
+				JOIN user_articles ua ON a.id = ua.article_id
+				JOIN users u ON ua.user_id = u.id
+				JOIN categories c ON a.categoryId = c.id
+			WHERE
+				u.id = UUID_TO_BIN(?);`;
+
+		const [result] = await connection.query(query, [userId]);
+
+		return result;
+	}
+
+	static async createArticleForUser({ userId, article }) {
+		const createdArticle = await this.create({ article });
+
+		if (createdArticle) {
+			const query =
+				"INSERT INTO user_articles (user_id, article_id) VALUES (UUID_TO_BIN(?), UUID_TO_BIN(?))";
+			const [result] = await connection.query(query, [
+				userId,
+				createdArticle.id,
+			]);
+
+			if (result.affectedRows === 1) {
+				return createdArticle;
+			}
+		}
+
+		return false;
 	}
 }
