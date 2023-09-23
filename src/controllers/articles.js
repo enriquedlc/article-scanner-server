@@ -83,6 +83,9 @@ export class ArticleController {
 
 	createArticleForUser = async (req, res) => {
 		const userId = req.body.userId;
+
+		if (!userId) return res.status(400).json({ message: "userId is required" });
+
 		const result = validateArticle(req.body.article);
 
 		if (!result.success)
