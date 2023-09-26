@@ -71,7 +71,7 @@ export class UserModel {
 
 	static async login({ username, password }) {
 		const query =
-			"SELECT BIN_TO_UUID(id) as id, username, password FROM users WHERE username = ?;";
+			"SELECT BIN_TO_UUID(id) as id, username, password, createdAt, updatedAt, email FROM users WHERE username = ?;";
 		const [result] = await connection.query(query, [username]);
 
 		if (result.length === 0) {
@@ -86,7 +86,7 @@ export class UserModel {
 			return null;
 		}
 
-		return userToResponseDTO(user);
+		return user;
 	}
 
 	static async patchUsername({ id, username }) {
