@@ -29,7 +29,11 @@ export class UserController {
 
 		const newUser = await this.userModel.create({ user: result.data });
 
-		res.status(201).json(newUser);
+		res.status(201).json({
+			message: "User created successfully",
+			created: true,
+			user: newUser,
+		});
 	};
 
 	update = async (req, res) => {
