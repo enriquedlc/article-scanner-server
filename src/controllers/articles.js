@@ -75,7 +75,10 @@ export class ArticleController {
 			userId,
 		});
 
-		res.json(articles);
+		res.json({
+			message: "Articles fetched successfully",
+			articles,
+		});
 	};
 
 	createArticleForUser = async (req, res) => {
