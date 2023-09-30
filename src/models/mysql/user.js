@@ -82,6 +82,8 @@ export class UserModel {
 
 		const isPasswordValid = await comparePassword(password, user.password);
 
+		console.log({ isPasswordValid });
+
 		if (!isPasswordValid) {
 			return null;
 		}

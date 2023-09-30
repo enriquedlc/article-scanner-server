@@ -23,17 +23,30 @@ export class UserController {
 	};
 
 	create = async (req, res) => {
-		const result = validateUser(req.body);
+		try {
+			const result = validateUser(req.body);
 
-		if (!result.success) return res.status(400).json({ message: result.error });
+			if (!result.success)
+				return res.status(400).json({ message: result.error });
 
-		const newUser = await this.userModel.create({ user: result.data });
+			const newUser = await this.userModel.create({ user: result.data });
 
-		res.status(201).json({
-			message: "User created successfully",
-			created: true,
-			user: newUser,
-		});
+			console.log(newUser);
+
+			res.status(201).json({
+				message: "User created successfully",
+				created: true,
+				user: newUser,
+			});
+		} catch (error) {
+			console.error(error);
+			if (error.code === "ER_DUP_ENTRY")
+				return res.status(400).json({
+					message: "Username already exists",
+					created: false,
+					user: null,
+				});
+		}
 	};
 
 	update = async (req, res) => {
@@ -69,6 +82,8 @@ export class UserController {
 	login = async (req, res) => {
 		const { username, password } = req.body;
 
+		console.log({ username, password });
+
 		const result = validatePartialUser({ username, password });
 
 		if (!result.success)
@@ -77,6 +92,7 @@ export class UserController {
 				.json({ message: JSON.parse(result.error.message) });
 
 		const user = await this.userModel.login({ username, password });
+		console.log({ user });
 
 		if (!user)
 			return res

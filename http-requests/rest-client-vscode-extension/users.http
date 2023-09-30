@@ -4,15 +4,14 @@ GET http://localhost:1234/users
 ### Get user by id
 GET http://localhost:1234/users/21e7c860-5ca0-11ee-b384-a036bcd0d29a
 
-// TODO: handle duplicate entry error
 ### Create user
 POST http://localhost:1234/users
 Content-Type: application/json
 
 {
-    "username": "admin1",
-    "email": "newuser1@gmail.com",
-    "password": "12345678"
+    "username": "admin",
+    "email": "newuser@gmail.com",
+    "password": "12341234"
 }
 
 ### Update user
