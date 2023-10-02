@@ -86,14 +86,12 @@ export class ArticleController {
 
 	createArticleForUser = async (req, res) => {
 		const userId = req.body.userId;
-		console.log("createArticleForUser", userId);
 
 		if (!userId) return res.status(400).json({ message: "userId is required" });
 
 		const result = validateArticle(req.body.article);
 
 		if (!result.success) {
-			console.log("createArticleForUser", result.error.message);
 			return res
 				.status(400)
 				.json({ message: JSON.parse(result.error.message) });
@@ -101,12 +99,12 @@ export class ArticleController {
 
 		const newArticle = await this.articleModel.createArticleForUser({
 			userId,
-			created: true,
 			article: result.data,
 		});
 
 		res.status(201).json({
 			message: "Article created successfully",
+			created: true,
 			article: newArticle,
 		});
 	};

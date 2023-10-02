@@ -31,8 +31,6 @@ export class UserController {
 
 			const newUser = await this.userModel.create({ user: result.data });
 
-			console.log(newUser);
-
 			res.status(201).json({
 				message: "User created successfully",
 				created: true,
@@ -82,8 +80,6 @@ export class UserController {
 	login = async (req, res) => {
 		const { username, password } = req.body;
 
-		console.log({ username, password });
-
 		const result = validatePartialUser({ username, password });
 
 		if (!result.success)
@@ -92,7 +88,6 @@ export class UserController {
 				.json({ message: JSON.parse(result.error.message) });
 
 		const user = await this.userModel.login({ username, password });
-		console.log({ user });
 
 		if (!user)
 			return res
