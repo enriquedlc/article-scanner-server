@@ -35,11 +35,14 @@ export class ArticleController {
 				.status(400)
 				.json({ message: JSON.parse(result.error.message) });
 
-		const newArticle = await this.articleModel.create({ article: result.data });
+		const { createdArticle, created } = await this.articleModel.create({
+			article: result.data,
+		});
 
-		res.status(201).json({
+		return res.json({
 			message: "Article created successfully",
-			article: newArticle,
+			createdArticle,
+			created,
 		});
 	};
 
@@ -88,10 +91,11 @@ export class ArticleController {
 
 		const result = validateArticle(req.body.article);
 
-		if (!result.success)
+		if (!result.success) {
 			return res
 				.status(400)
 				.json({ message: JSON.parse(result.error.message) });
+		}
 
 		const newArticle = await this.articleModel.createArticleForUser({
 			userId,
@@ -100,6 +104,7 @@ export class ArticleController {
 
 		res.status(201).json({
 			message: "Article created successfully",
+			created: true,
 			article: newArticle,
 		});
 	};

@@ -23,17 +23,28 @@ export class UserController {
 	};
 
 	create = async (req, res) => {
-		const result = validateUser(req.body);
+		try {
+			const result = validateUser(req.body);
 
-		if (!result.success) return res.status(400).json({ message: result.error });
+			if (!result.success)
+				return res.status(400).json({ message: result.error });
 
-		const newUser = await this.userModel.create({ user: result.data });
+			const newUser = await this.userModel.create({ user: result.data });
 
-		res.status(201).json({
-			message: "User created successfully",
-			created: true,
-			user: newUser,
-		});
+			res.status(201).json({
+				message: "User created successfully",
+				created: true,
+				user: newUser,
+			});
+		} catch (error) {
+			console.error(error);
+			if (error.code === "ER_DUP_ENTRY")
+				return res.status(400).json({
+					message: "Username already exists",
+					created: false,
+					user: null,
+				});
+		}
 	};
 
 	update = async (req, res) => {
@@ -87,25 +98,34 @@ export class UserController {
 	};
 
 	updateUsername = async (req, res) => {
-		const { id } = req.params;
-		const { username } = req.body;
+		try {
+			const { id } = req.params;
+			const { username } = req.body;
 
-		const result = validatePartialUser({ username });
+			const result = validatePartialUser({ username });
 
-		if (!result.success)
-			return res
-				.status(400)
-				.json({ message: JSON.parse(result.error.message) });
+			if (!result.success)
+				return res
+					.status(400)
+					.json({ message: JSON.parse(result.error.message) });
 
-		const updatedUser = await this.userModel.patchUsername({ id, username });
+			const updatedUser = await this.userModel.patchUsername({ id, username });
 
-		if (!updatedUser)
-			return res.status(404).json({ message: "User not found" });
+			if (!updatedUser)
+				return res.status(404).json({ message: "User not found" });
 
-		res.json({
-			message: "Username updated successfully",
-			user: updatedUser,
-		});
+			res.json({
+				message: "Username updated successfully",
+				user: updatedUser,
+			});
+		} catch (error) {
+			if (error.code === "ER_DUP_ENTRY")
+				return res.status(400).json({
+					message: "Username already taken",
+					updated: false,
+					user: null,
+				});
+		}
 	};
 
 	updatePassword = async (req, res) => {
@@ -131,24 +151,33 @@ export class UserController {
 	};
 
 	updateEmail = async (req, res) => {
-		const { id } = req.params;
-		const { email } = req.body;
+		try {
+			const { id } = req.params;
+			const { email } = req.body;
 
-		const result = validatePartialUser({ email });
+			const result = validatePartialUser({ email });
 
-		if (!result.success)
-			return res
-				.status(400)
-				.json({ message: JSON.parse(result.error.message) });
+			if (!result.success)
+				return res
+					.status(400)
+					.json({ message: JSON.parse(result.error.message) });
 
-		const updatedUser = await this.userModel.patchEmail({ id, email });
+			const updatedUser = await this.userModel.patchEmail({ id, email });
 
-		if (!updatedUser)
-			return res.status(404).json({ message: "User not found" });
+			if (!updatedUser)
+				return res.status(404).json({ message: "User not found" });
 
-		res.json({
-			message: "Email updated successfully",
-			user: updatedUser,
-		});
+			res.json({
+				message: "Email updated successfully",
+				user: updatedUser,
+			});
+		} catch (error) {
+			if (error.code === "ER_DUP_ENTRY")
+				return res.status(400).json({
+					message: "Email already taken",
+					updated: false,
+					user: null,
+				});
+		}
 	};
 }
