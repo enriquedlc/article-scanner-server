@@ -1,7 +1,4 @@
-import {
-	validateArticle,
-	validatePartialArticle,
-} from "../schemas/articles.js";
+import { validateArticle, validatePartialArticle } from "../schemas/articles.js";
 
 // TODO: the articles should be paginated
 
@@ -31,9 +28,7 @@ export class ArticleController {
 		const result = validateArticle(req.body);
 
 		if (!result.success)
-			return res
-				.status(400)
-				.json({ message: JSON.parse(result.error.message) });
+			return res.status(400).json({ message: JSON.parse(result.error.message) });
 
 		const { createdArticle, created } = await this.articleModel.create({
 			article: result.data,
@@ -51,9 +46,7 @@ export class ArticleController {
 		const result = validatePartialArticle(req.body);
 
 		if (!result.success)
-			return res
-				.status(400)
-				.json({ message: JSON.parse(result.error.message) });
+			return res.status(400).json({ message: JSON.parse(result.error.message) });
 
 		const updatedArticle = await this.articleModel.update({
 			id,
@@ -92,9 +85,7 @@ export class ArticleController {
 		const result = validateArticle(req.body.article);
 
 		if (!result.success) {
-			return res
-				.status(400)
-				.json({ message: JSON.parse(result.error.message) });
+			return res.status(400).json({ message: JSON.parse(result.error.message) });
 		}
 
 		const newArticle = await this.articleModel.createArticleForUser({
