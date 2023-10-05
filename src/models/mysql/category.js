@@ -27,8 +27,7 @@ export class CategoryModel {
 	static async create({ category }) {
 		const uuidResult = await connection.query("SELECT UUID() uuid");
 
-		const query =
-			"INSERT INTO categories (id, categoryName) VALUES (UUID_TO_BIN(?), ?);";
+		const query = "INSERT INTO categories (id, categoryName) VALUES (UUID_TO_BIN(?), ?);";
 		const [result] = await connection.query(query, [
 			uuidResult[0][0].uuid,
 			category.categoryName,
@@ -47,8 +46,7 @@ export class CategoryModel {
 	}
 
 	static async update({ id, category }) {
-		const query =
-			"UPDATE categories SET categoryName = ? WHERE id = UUID_TO_BIN(?);";
+		const query = "UPDATE categories SET categoryName = ? WHERE id = UUID_TO_BIN(?);";
 		const [result] = await connection.query(query, [category.categoryName, id]);
 		if (result.affectedRows === 1) {
 			return await this.getById({ id });
