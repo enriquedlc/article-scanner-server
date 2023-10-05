@@ -90,8 +90,7 @@ export class UserModel {
 	}
 
 	static async patchUsername({ id, username }) {
-		const query =
-			"UPDATE users SET username = ?, updatedAt = ? WHERE id = UUID_TO_BIN(?);";
+		const query = "UPDATE users SET username = ?, updatedAt = ? WHERE id = UUID_TO_BIN(?);";
 		const [result] = await connection.query(query, [username, new Date(), id]);
 
 		if (result.affectedRows === 1) {
@@ -101,8 +100,7 @@ export class UserModel {
 	}
 
 	static async patchPassword({ id, password }) {
-		const query =
-			"UPDATE users SET password = ?, updatedAt = ? WHERE id = UUID_TO_BIN(?);";
+		const query = "UPDATE users SET password = ?, updatedAt = ? WHERE id = UUID_TO_BIN(?);";
 		const [result] = await connection.query(query, [
 			await encryptPassword(password),
 			new Date(),
@@ -116,8 +114,7 @@ export class UserModel {
 	}
 
 	static async patchEmail({ id, email }) {
-		const query =
-			"UPDATE users SET email = ?, updatedAt = ? WHERE id = UUID_TO_BIN(?);";
+		const query = "UPDATE users SET email = ?, updatedAt = ? WHERE id = UUID_TO_BIN(?);";
 		const [result] = await connection.query(query, [email, new Date(), id]);
 
 		if (result.affectedRows === 1) {
