@@ -10,6 +10,7 @@ const configuration = {
 
 const connection = await mysql.createConnection(configuration);
 
+// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class ArticleModel {
 	static async getAll({ createdAt }) {
 		const query =
@@ -125,10 +126,7 @@ export class ArticleModel {
 		if (createdArticle) {
 			const query =
 				"INSERT INTO user_articles (user_id, article_id) VALUES (UUID_TO_BIN(?), UUID_TO_BIN(?))";
-			const [result] = await connection.query(query, [
-				userId,
-				createdArticle.id,
-			]);
+			const [result] = await connection.query(query, [userId, createdArticle.id]);
 
 			if (result.affectedRows === 1) {
 				return createdArticle;

@@ -26,8 +26,7 @@ export class UserController {
 		try {
 			const result = validateUser(req.body);
 
-			if (!result.success)
-				return res.status(400).json({ message: result.error });
+			if (!result.success) return res.status(400).json({ message: result.error });
 
 			const newUser = await this.userModel.create({ user: result.data });
 
@@ -52,14 +51,11 @@ export class UserController {
 		const result = validateUser(req.body);
 
 		if (!result.success)
-			return res
-				.status(400)
-				.json({ message: JSON.parse(result.error.message) });
+			return res.status(400).json({ message: JSON.parse(result.error.message) });
 
 		const updatedUser = await this.userModel.update({ id, user: result.data });
 
-		if (!updatedUser)
-			return res.status(404).json({ message: "User not found" });
+		if (!updatedUser) return res.status(404).json({ message: "User not found" });
 
 		res.json({
 			message: "User updated successfully",
@@ -83,9 +79,7 @@ export class UserController {
 		const result = validatePartialUser({ username, password });
 
 		if (!result.success)
-			return res
-				.status(400)
-				.json({ message: JSON.parse(result.error.message) });
+			return res.status(400).json({ message: JSON.parse(result.error.message) });
 
 		const user = await this.userModel.login({ username, password });
 
@@ -105,14 +99,11 @@ export class UserController {
 			const result = validatePartialUser({ username });
 
 			if (!result.success)
-				return res
-					.status(400)
-					.json({ message: JSON.parse(result.error.message) });
+				return res.status(400).json({ message: JSON.parse(result.error.message) });
 
 			const updatedUser = await this.userModel.patchUsername({ id, username });
 
-			if (!updatedUser)
-				return res.status(404).json({ message: "User not found" });
+			if (!updatedUser) return res.status(404).json({ message: "User not found" });
 
 			res.json({
 				message: "Username updated successfully",
@@ -135,14 +126,11 @@ export class UserController {
 		const result = validatePartialUser({ password });
 
 		if (!result.success)
-			return res
-				.status(400)
-				.json({ message: JSON.parse(result.error.message) });
+			return res.status(400).json({ message: JSON.parse(result.error.message) });
 
 		const updatedUser = await this.userModel.patchPassword({ id, password });
 
-		if (!updatedUser)
-			return res.status(404).json({ message: "User not found" });
+		if (!updatedUser) return res.status(404).json({ message: "User not found" });
 
 		res.json({
 			message: "Password updated successfully",
@@ -158,14 +146,11 @@ export class UserController {
 			const result = validatePartialUser({ email });
 
 			if (!result.success)
-				return res
-					.status(400)
-					.json({ message: JSON.parse(result.error.message) });
+				return res.status(400).json({ message: JSON.parse(result.error.message) });
 
 			const updatedUser = await this.userModel.patchEmail({ id, email });
 
-			if (!updatedUser)
-				return res.status(404).json({ message: "User not found" });
+			if (!updatedUser) return res.status(404).json({ message: "User not found" });
 
 			res.json({
 				message: "Email updated successfully",

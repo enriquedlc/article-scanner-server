@@ -25,9 +25,7 @@ export class CategoryModel {
 	}
 
 	static async delete(id) {
-		const categoryIndex = categories.findIndex(
-			(category) => category.id === id,
-		);
+		const categoryIndex = categories.findIndex((category) => category.id === id);
 
 		if (categoryIndex === -1) return false;
 
@@ -37,9 +35,7 @@ export class CategoryModel {
 	}
 
 	static async update({ id, category }) {
-		const categoryIndex = categories.findIndex(
-			(category) => category.id === id,
-		);
+		const categoryIndex = categories.findIndex((category) => category.id === id);
 
 		if (categoryIndex === -1) return false;
 
