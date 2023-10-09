@@ -103,10 +103,15 @@ export class UserController {
 
 			const updatedUser = await this.userModel.patchUsername({ id, username });
 
-			if (!updatedUser) return res.status(404).json({ message: "User not found" });
+			if (!updatedUser) return res.status(404).json({
+				message: "User not found",
+				updated: false,
+				user: null,
+			});
 
 			res.json({
 				message: "Username updated successfully",
+				updated: true,
 				user: updatedUser,
 			});
 		} catch (error) {

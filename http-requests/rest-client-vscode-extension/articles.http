@@ -46,4 +46,4 @@ DELETE http://localhost:1234/articles/1
 // specific for users
 
 ### Get articles by user id
-GET http://localhost:1234/articles/user/44ac4232-5faf-11ee-999d-a036bcd0d29a
+GET http://localhost:1234/articles/user/4af975d8-5faf-11ee-999d-a036bcd0d29a

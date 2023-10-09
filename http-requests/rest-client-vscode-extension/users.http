@@ -37,11 +37,11 @@ Content-Type: application/json
 }
 
 ### patch username
-PATCH http://localhost:1234/users/username/44ac30b2-5faf-11ee-999d-a036bcd0d29a
+PATCH http://localhost:1234/users/username/4af975d8-5faf-11ee-999d-a036bcd0d29a
 Content-Type: application/json
 
 {
-    "username": "admin"
+    "username": "adminSi"
 }
 
 ### patch password
