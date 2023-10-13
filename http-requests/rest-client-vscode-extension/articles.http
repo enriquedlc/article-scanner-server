@@ -2,7 +2,7 @@
 GET http://localhost:1234/articles
 
 ### Get a specific article
-GET http://localhost:1234/articles/8a70c5a3-5a43-11ee-832e-a036bcd0d29a
+GET http://localhost:1234/articles/3b24435e-69e1-11ee-8fb5-a036bcd0d29a
 
 ### Get articles by date
 GET http://localhost:1234/articles?createdAt=2023-09-21T17:04:42.000Z
@@ -26,7 +26,7 @@ Content-Type: application/json
 }
 
 ### Update an article
-PUT http://localhost:1234/articles/8a70c5a3-5a43-11ee-832e-a036bcd0d29a
+PUT http://localhost:1234/articles/000069e6-6177-11ee-9823-a036bcd0d29a
 Content-Type: application/json
 
 {
@@ -41,9 +41,9 @@ Content-Type: application/json
 }
 
 ### Delete an article
-DELETE http://localhost:1234/articles/1
+DELETE http://localhost:1234/articles/a5bccc2c-69ea-11ee-8fb5-a036bcd0d29a
 
 // specific for users
 
 ### Get articles by user id
-GET http://localhost:1234/articles/user/4af975d8-5faf-11ee-999d-a036bcd0d29a
+GET http://localhost:1234/articles/user/a5c43a8e-69ea-11ee-8fb5-a036bcd0d29a

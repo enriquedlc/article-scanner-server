@@ -53,7 +53,9 @@ export class ArticleController {
 			article: result.data,
 		});
 
-		res.json({ message: "Article updated sucessfully", data: updatedArticle });
+		if (!updatedArticle) return res.status(404).json({ message: "Article not found" });
+
+		res.json({ updated: true, message: "Article updated sucessfully", data: updatedArticle });
 	};
 
 	delete = async (req, res) => {
@@ -62,7 +64,7 @@ export class ArticleController {
 
 		if (!result) return res.status(404).json({ message: "Article not found" });
 
-		return res.json({ message: "Article deleted" });
+		return res.json({ deleted: result, message: "Article deleted" });
 	};
 
 	getArticlesByUser = async (req, res) => {
