@@ -23,7 +23,7 @@ export class UserModel {
 
 	static async getById({ id }) {
 		const query =
-			"SELECT BIN_TO_UUID(id) as id, username, email, createdAt, updatedAt FROM users WHERE id = UUID_TO_BIN(?);";
+			"SELECT BIN_TO_UUID(id) as id, username, email, createdAt, updatedAt, password FROM users WHERE id = UUID_TO_BIN(?);";
 		const [result] = await connection.query(query, [id]);
 		return result[0];
 	}
@@ -109,7 +109,7 @@ export class UserModel {
 
 		if (result.affectedRows === 1) {
 			const user = await this.getById({ id });
-			return userToResponseDTO(user);
+			return user;
 		}
 	}
 

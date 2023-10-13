@@ -12,7 +12,7 @@ POST http://localhost:1234/articles
 Content-Type: application/json
 
 {
-    "userId": "44ac30b2-5faf-11ee-999d-a036bcd0d29a",
+    "userId": "439c041f-69c6-11ee-8fb5-a036bcd0d29a",
     "article": {
         "articleName": "New Article 121 21 22 1",
         "barcode": "1234567890123",
