@@ -10,7 +10,6 @@ const configuration = {
 
 const connection = await mysql.createConnection(configuration);
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class ArticleModel {
 	static async getAll({ createdAt }) {
 		const query =
@@ -65,8 +64,10 @@ export class ArticleModel {
 	}
 
 	static async delete(id) {
-		const query = "DELETE FROM articles WHERE id = UUID_TO_BIN(?)";
-		const [result] = await connection.query(query, [id]);
+		const query1 = "DELETE FROM user_articles WHERE article_id = UUID_TO_BIN(?)";
+		await connection.query(query1, [id]);
+		const query2 = "DELETE FROM articles WHERE id = UUID_TO_BIN(?)";
+		const [result] = await connection.query(query2, [id]);
 		return result.affectedRows === 1;
 	}
 
