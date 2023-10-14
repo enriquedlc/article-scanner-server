@@ -103,11 +103,12 @@ export class UserController {
 
 			const updatedUser = await this.userModel.patchUsername({ id, username });
 
-			if (!updatedUser) return res.status(404).json({
-				message: "User not found",
-				updated: false,
-				user: null,
-			});
+			if (!updatedUser)
+				return res.status(404).json({
+					message: "User not found",
+					updated: false,
+					user: null,
+				});
 
 			res.json({
 				message: "Username updated successfully",
@@ -135,11 +136,12 @@ export class UserController {
 
 		const updatedUser = await this.userModel.patchPassword({ id, password });
 
-		if (!updatedUser) return res.status(404).json({
-			message: "User not found",
-			updated: false,
-			user: null,
-		});
+		if (!updatedUser)
+			return res.status(404).json({
+				message: "User not found",
+				updated: false,
+				user: null,
+			});
 
 		res.json({
 			message: "Password updated successfully",
@@ -160,11 +162,12 @@ export class UserController {
 
 			const updatedUser = await this.userModel.patchEmail({ id, email });
 
-			if (!updatedUser) return res.status(404).json({
-				message: "User not found",
-				updated: false,
-				user: null,
-			});
+			if (!updatedUser)
+				return res.status(404).json({
+					message: "User not found",
+					updated: false,
+					user: null,
+				});
 
 			res.json({
 				message: "Email updated successfully",
