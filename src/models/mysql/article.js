@@ -10,7 +10,6 @@ const configuration = {
 
 const connection = await mysql.createConnection(configuration);
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class ArticleModel {
 	static async getAll({ createdAt }) {
 		const query =
