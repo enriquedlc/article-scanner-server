@@ -8,7 +8,7 @@ export class CategoryController {
 	getAll = async (_, res) => {
 		const categories = await this.categoryModel.getAll();
 
-		res.json(categories);
+		res.json({ message: "Categories retrieved successfully", categories });
 	};
 
 	getById = async (req, res) => {

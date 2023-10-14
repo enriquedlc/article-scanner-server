@@ -24,7 +24,8 @@
 			"complexity": {
 				"all": true,
 				"noUselessCatch": "warn",
-				"noExtraBooleanCast": "warn"
+				"noExtraBooleanCast": "warn",
+				"noStaticOnlyClass": "off"
 			},
 			"nursery": {
 				"recommended": true,

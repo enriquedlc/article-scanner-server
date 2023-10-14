@@ -10,7 +10,7 @@ Content-Type: application/json
 
 {
     "username": "admin",
-    "email": "newuser@gmail.com",
+    "email": "admin@gmail.com",
     "password": "12341234"
 }
 
@@ -41,11 +41,11 @@ PATCH http://localhost:1234/users/username/4af975d8-5faf-11ee-999d-a036bcd0d29a
 Content-Type: application/json
 
 {
-    "username": "adminSi"
+    "username": "admin"
 }
 
 ### patch password
-PATCH http://localhost:1234/users/password/21e7c860-5ca0-11ee-b384-a036bcd0d29a
+PATCH http://localhost:1234/users/password/44ac30b2-5faf-11ee-999d-a036bcd0d29a
 Content-Type: application/json
 
 {
