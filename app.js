@@ -17,7 +17,7 @@ export const createServerApp = ({ articleModel, userModel, categoryModel }) => {
 	app.use("/users", createUserRouter({ userModel }));
 	app.use("/categories", createCategoryRouter({ categoryModel }));
 
-	const PORT = process.env.PORT || 1234;
+	const PORT = process.env.PORT ?? 1234;
 
 	app.listen(PORT, () => {
 		console.log(`Server listening on port ${PORT}`);
