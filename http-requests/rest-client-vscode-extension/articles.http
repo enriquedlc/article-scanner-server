@@ -20,7 +20,7 @@ Content-Type: application/json
         "shelf": 20,
         "warehouse": 100,
         "category": {
-            "categoryName": "Tornillería"
+            "categoryName": "Electricidad"
         }
     }
 }
