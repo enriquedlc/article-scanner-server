@@ -16,7 +16,7 @@ export const categorySchema = z.object({
 			"Carteles",
 			"Pesca",
 			"Cutters",
-			"Cordeltería",
+			"Cordelería",
 			"Pintura",
 			"Jardinería",
 		],
