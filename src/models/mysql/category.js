@@ -1,11 +1,13 @@
 import mysql from "mysql2/promise";
 
+import { credentials } from "../../../credentials.js";
+
 const configuration = {
-	host: "localhost",
-	user: "root",
-	port: 3306,
-	password: "1234",
-	database: "articlescanner",
+	host: credentials.aws.host,
+	user: credentials.aws.user,
+	password: credentials.aws.password,
+	database: credentials.aws.database,
+	port: credentials.aws.port,
 };
 
 const connection = await mysql.createConnection(configuration);
