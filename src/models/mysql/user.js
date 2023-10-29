@@ -3,14 +3,12 @@ import mysql from "mysql2/promise";
 import { userToResponseDTO } from "../../dto/user-response-dto.js";
 import { comparePassword, encryptPassword } from "../../lib/bcrypt.js";
 
-import { credentials } from "../../../credentials.js";
-
 const configuration = {
-	host: credentials.aws.host,
-	user: credentials.aws.user,
-	password: credentials.aws.password,
-	database: credentials.aws.database,
-	port: credentials.aws.port,
+	host: process.env.HOST,
+	user: process.env.USER,
+	password: process.env.PASSWORD,
+	database: process.env.DATABASE,
+	port: process.env.PORT,
 };
 
 const connection = await mysql.createConnection(configuration);
