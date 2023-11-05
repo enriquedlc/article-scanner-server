@@ -1,5 +1,5 @@
 ### Get all articles
-GET http://localhost:1234/articles
+GET https://localhost:1234/articles
 
 ### Get a specific article
 GET http://localhost:1234/articles/3b24435e-69e1-11ee-8fb5-a036bcd0d29a

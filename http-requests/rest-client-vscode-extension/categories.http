@@ -22,3 +22,6 @@ Content-Type: application/json
 
 ### Delete an article
 DELETE http://localhost:1234/categories/a5bda104-69ea-11ee-8fb5-a036bcd0d29a
+
+###
+GET https://article-scanner-server-dev-dzcf.3.us-1.fl0.io/categories
