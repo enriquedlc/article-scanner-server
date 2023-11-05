@@ -2,6 +2,8 @@
 
 ### Nodejs server for an article scanner app built with React Native.
 
+Built with node and express using MVC architecture.
+
 e.g: [api | articles](https://article-scanner-server-dev-dzcf.3.us-1.fl0.io/articles)
 
 Backend deployed with [fl0](https://www.fl0.com/)
